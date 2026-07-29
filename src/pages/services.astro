@@ -1,38 +1,91 @@
 ---
 import Base from '../layouts/Base.astro';
+
+const scope = [
+  '記帳', '出納', '資金調度', '應收帳款', '應付帳款', '薪資', '勞健保',
+  '營業稅', '所得稅', '扣繳申報', '稅簽', '開立發票', '對帳', '傳票',
+  '月報', '財務分析', '管理報表', '預算', '現金流預測', '成本分析',
+  '董事會', '股東會', '資本與股權', '融資', '募資', '投資評估',
+  '內部控制', '會計師窗口', '檔案管理', '損益', 'KPI',
+];
+
+const steps = [
+  { n: 'STEP 1', t: '初步評估', d: '了解你的生意與財務現況，判斷是否適合。' },
+  { n: 'STEP 2', t: '框架提案', d: '針對你的狀況，提出治理框架與導入建議。' },
+  { n: 'STEP 3', t: '導入與口徑對齊', d: '資料、流程、口徑一次整清楚。' },
+  { n: 'STEP 4', t: '每月財務治理', d: '固定月度報告加月會，進入節奏。' },
+];
+
+const compare = [
+  { alt: '本土記帳／中小事務所', limit: '以合規申報為主，缺決策支持與後續追蹤。', yc: '我給你管理報表、月會追蹤與策略對焦，讓數字真的變成決策。' },
+  { alt: '大型事務所顧問／外部 CFO', limit: '報價偏高、最小合約不適合成長型；多半只給策略、不管執行。', yc: '我費率合理、月度節奏固定，從策略到執行一條龍。' },
+  { alt: '自聘 in-house 財務', limit: '全才請不起、資淺又不夠用，還得自己管理與承擔流動風險。', yc: '我給你一個團隊的財務能力，用得起、可客製點餐，隨階段調整。' },
+];
 ---
-<Base title="服務" description="從全外包財務治理到顧問分析，依公司階段搭配。">
+<Base title="服務" description="缺哪塊、補哪塊——依你的階段補上財務缺的那塊，和現有會計並行、每月固定節奏交付，不用養一整個團隊。">
   <section class="read services">
     <header class="sh">
       <p class="muted mono">服務</p>
-      <h1>依公司階段，搭配對的財務治理</h1>
-      <p class="muted lead">〔待補一句：我做的不是記帳，是讓你看得懂、決策得了的財務治理。〕</p>
+      <h1>從記帳到募資，缺哪塊、補哪塊</h1>
+      <p class="lead">依你的階段，補上財務缺的那塊。和你現有的會計並行、每月固定節奏交付，不用養一整個團隊。</p>
     </header>
 
-    <div class="tiers">
-      <div class="tier">
-        <h2>全外包財務治理</h2>
-        <p class="muted">〔待補〕我們是你的財務部：記帳、報表、月報、合規一手包，你只留判斷。</p>
+    <section class="pain">
+      <h2>你是不是也卡在這些地方</h2>
+      <p class="muted">中小企業最需要全方位的財務，偏偏最難請得起。這些卡點，其實正是你還沒用上的槓桿。</p>
+      <ul class="pain-list">
+        <li><b>什麼都要會，卻請不起</b>：需要一個財務全才，卻養不起一整個團隊。</li>
+        <li><b>找到人，也只是堪用</b>：人才難尋，找到的多半只堪基礎作業。</li>
+        <li><b>傳統財會，跟不上你的模式</b>：只會照本宣科，缺乏彈性。</li>
+        <li><b>拚生意，卻被財務扯後腿</b>：融資、擴張、現金、稅務，處處卡關。</li>
+        <li><b>行政與申報的地雷</b>：平常沒整理，一漏就挨罰。</li>
+      </ul>
+    </section>
+
+    <section class="block">
+      <h2>我能補的，從記帳到募資</h2>
+      <p class="muted">把財務工作攤開來，你缺哪塊、我補哪塊。</p>
+      <ul class="chips">
+        {scope.map((s) => <li>{s}</li>)}
+      </ul>
+      <p class="muted fit">特別適合：中小企業、新創公司、成長型企業、連鎖／電商品牌。</p>
+    </section>
+
+    <section class="block">
+      <h2>我們怎麼開始</h2>
+      <ol class="steps">
+        {steps.map((s) => (
+          <li>
+            <span class="mono step-n">{s.n}</span>
+            <div>
+              <h3>{s.t}</h3>
+              <p class="muted">{s.d}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <section class="block">
+      <h2>跟別人有什麼不同</h2>
+      <div class="compare">
+        {compare.map((c) => (
+          <div class="crow">
+            <p class="alt">{c.alt}</p>
+            <p class="limit muted">{c.limit}</p>
+            <p class="yc">{c.yc}</p>
+          </div>
+        ))}
       </div>
-      <div class="tier">
-        <h2>顧問分析</h2>
-        <p class="muted">〔待補〕你有自己的帳，我做部門損益、現金、融資結構的分析與月會。</p>
-      </div>
-    </div>
+    </section>
 
-    <hr />
-
-    <div class="block">
-      <h2>收費怎麼算</h2>
-      <p class="muted">〔待補：透明定價 / 依實體數與服務深度，過濾不合適的詢問。〕</p>
-    </div>
-
-    <div class="block">
-      <h2>跟記帳士差在哪</h2>
-      <p class="muted">〔待補：記帳士做稅帳，我做管理帳與治理——這頁是轉換的關鍵，之後好好寫。〕</p>
-    </div>
+    <section class="block">
+      <h2>怎麼收費</h2>
+      <p class="muted">沒有制式價目表。費用依你要補哪些塊、有幾個實體、服務多深來客製。先做一次財務健檢、把你的現況看清楚，再談合適的方案。</p>
+    </section>
 
     <div class="cta-row">
+      <p class="cta-line">先從一次財務健檢開始，我幫你把數字看清楚。</p>
       <a href="/book" class="btn btn-accent">預約 30 分鐘初談</a>
     </div>
   </section>
@@ -40,14 +93,31 @@ import Base from '../layouts/Base.astro';
 
 <style>
   .services { padding-top: 4rem; }
-  .sh h1 { font-size: clamp(1.8rem, 5vw, 2.8rem); margin: .5rem 0 .8rem; }
-  .lead { font-size: 1.05rem; }
-  .tiers { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 2.5rem 0; }
-  .tier { border: 1px solid var(--line); padding: 1.8rem; }
-  .tier h2 { font-size: 1.3rem; margin: 0 0 .8rem; }
-  .tier p { font-size: .95rem; margin: 0; }
-  .block { margin: 2rem 0; }
-  .block h2 { font-size: 1.3rem; }
-  .cta-row { margin: 3rem 0 0; }
-  @media (max-width: 640px) { .tiers { grid-template-columns: 1fr; } }
+  .sh h1 { font-size: clamp(1.8rem, 5vw, 2.8rem); margin: .5rem 0 .9rem; }
+  .lead { font-size: 1.1rem; line-height: 1.85; margin: 0; }
+
+  .pain { margin: 3rem 0; }
+  .pain h2, .block h2 { font-size: 1.35rem; margin: 0 0 .6rem; }
+  .pain-list { list-style: none; padding: 0; margin: 1.2rem 0 0; }
+  .pain-list li { padding: .9rem 0; border-top: 1px solid var(--line); font-size: .98rem; line-height: 1.7; }
+
+  .block { margin: 3rem 0; }
+  .chips { list-style: none; padding: 0; margin: 1.2rem 0; display: flex; flex-wrap: wrap; gap: .5rem; }
+  .chips li { font-size: .85rem; color: var(--ink-soft); border: 1px solid var(--line); padding: .3rem .7rem; border-radius: 3px; }
+  .fit { margin: 1rem 0 0; }
+
+  .steps { list-style: none; padding: 0; margin: 1.4rem 0 0; }
+  .steps li { display: flex; gap: 1.2rem; padding: 1rem 0; border-top: 1px solid var(--line); }
+  .step-n { color: var(--accent); font-size: .8rem; min-width: 4.2rem; padding-top: .25rem; }
+  .steps h3 { font-size: 1.05rem; margin: 0 0 .25rem; }
+  .steps p { margin: 0; font-size: .93rem; }
+
+  .compare { margin: 1.4rem 0 0; }
+  .crow { padding: 1.3rem 0; border-top: 1px solid var(--line); }
+  .crow .alt { font-weight: 500; margin: 0 0 .3rem; }
+  .crow .limit { font-size: .92rem; margin: 0 0 .5rem; }
+  .crow .yc { margin: 0; font-size: .98rem; color: var(--accent); }
+
+  .cta-row { margin: 3.5rem 0 0; border-top: 1px solid var(--ink); padding-top: 2rem; }
+  .cta-line { font-size: 1.1rem; margin: 0 0 1.2rem; }
 </style>
