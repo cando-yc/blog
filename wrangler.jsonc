@@ -1,0 +1,15 @@
+{
+  "name": "blog",
+  "compatibility_date": "2026-07-29",
+  // Astro 靜態輸出；純靜態資產、無 Worker 腳本
+  "assets": {
+    "directory": "./dist"
+  },
+  // 自動綁自訂網域（ycfinance.tw 這個 zone 已在本帳號，會自動建 DNS + SSL）
+  "routes": [
+    {
+      "pattern": "blog.ycfinance.tw",
+      "custom_domain": true
+    }
+  ]
+}
