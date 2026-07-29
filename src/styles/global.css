@@ -1,0 +1,108 @@
+/* ===== 設計系統：JDP 式極簡編輯風 =====
+   墨底 + 一個克制金色重點；襯線標題 + 無襯線內文；大量留白；淡格線；深/淺色 */
+
+:root {
+  --paper:     #FFFFFF;   /* 純白底（固定淺色定案 2026/07/15；暖白版＝#FAF8F3） */
+  --surface:   #FFFFFF;
+  --ink:       #1B1A17;   /* 近黑（暖） */
+  --ink-soft:  #55524B;   /* 次要文字 */
+  --ink-mute:  #8A867C;   /* 提示 / 日期 */
+  --line:      #E5E1D6;   /* 髮絲線 */
+  --accent:    #9C7A3C;   /* 克制金 / 赭 —— 只點綴 */
+  --accent-bg: #F1EADB;
+
+  --font-serif: "Noto Serif TC", "Songti TC", "Source Han Serif TC", serif;
+  --font-sans:  "Noto Sans TC", -apple-system, "PingFang TC", "Microsoft JhengHei", sans-serif;
+
+  --wrap:   1000px;   /* 寬區（首頁）— 中間收 */
+  --read:   720px;    /* 閱讀寬（文章） */
+  --step:   clamp(2rem, 6vw, 4.5rem);   /* 左右固定白邊，不貼齊視窗 */
+}
+
+/* 固定淺色：不隨系統切換深色模式（品牌一致、長文好讀） */
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; color-scheme: light; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.85;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: .01em;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: .01em;
+  color: var(--ink);
+}
+
+a { color: inherit; text-decoration: none; }
+a:hover { color: var(--accent); }
+
+img { max-width: 100%; height: auto; display: block; }
+
+.wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--step); }
+.read { max-width: var(--read); margin: 0 auto; padding: 0 var(--step); }
+
+.accent { color: var(--accent); }
+.muted  { color: var(--ink-mute); }
+.mono   { font-variant-numeric: tabular-nums; }
+
+/* 淡格線（只用在 hero 這種大區塊，透過 class 開） */
+.grid-bg {
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 26px 26px;
+  background-position: -1px -1px;
+}
+
+/* 文字型 CTA（首頁 hero 用，克制不做大按鈕） */
+.cta-text {
+  display: inline-flex; align-items: center; gap: .4em;
+  color: var(--accent); font-size: .95rem;
+  border-bottom: 1px solid var(--accent);
+  padding-bottom: 2px;
+}
+
+/* 需要實體按鈕時（服務頁/預約） */
+.btn {
+  display: inline-block;
+  padding: .7em 1.4em;
+  border: 1px solid var(--ink);
+  color: var(--ink);
+  font-size: .95rem;
+  border-radius: 0;
+  transition: background .15s, color .15s;
+}
+.btn:hover { background: var(--ink); color: var(--paper); }
+.btn-accent { border-color: var(--accent); color: var(--accent); }
+.btn-accent:hover { background: var(--accent); color: #fff; }
+
+/* 螢光筆重點：Obsidian ==重點== → <mark>，品牌色低調底色 */
+mark {
+  background: var(--accent-bg);
+  color: inherit;
+  padding: 0 .15em;
+  border-radius: 2px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+hr { border: none; border-top: 1px solid var(--line); margin: var(--step) 0; }
+
+::selection { background: var(--accent-bg); }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}

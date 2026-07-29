@@ -1,0 +1,49 @@
+---
+import { CATEGORIES } from '../consts';
+interface Props {
+  href: string;
+  title: string;
+  description?: string;
+  pubDate: Date;
+  category: string;
+  image?: string;
+  lead?: boolean;
+}
+const { href, title, description, pubDate, category, image, lead = false } = Astro.props;
+const d = pubDate;
+const dateStr = `${d.getFullYear()}/${d.getMonth() + 1}/${d.getDate()}`;
+---
+<a href={href} class:list={["gcard", { lead }]}>
+  <div class="media">
+    {image
+      ? <img src={image} alt={title} loading="lazy" />
+      : <div class="ph" aria-hidden="true"></div>}
+  </div>
+  <div class="meta">
+    <time class="mono muted" datetime={d.toISOString()}>{dateStr}</time>
+    <span class="cat">{CATEGORIES[category] ?? category}</span>
+  </div>
+  <h3 class="title">{title}</h3>
+  {description && <p class="desc muted">{description}</p>}
+</a>
+
+<style>
+  .gcard { display: block; }
+  .media { margin-bottom: .9rem; }
+  .media img, .ph {
+    width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block;
+    border: 1px solid var(--line); transition: opacity .15s ease;
+  }
+  .ph { background: var(--accent-bg); }
+  .gcard:hover .title { color: var(--accent); }
+  .gcard:hover img { opacity: .9; }
+  .meta { display: flex; gap: .8rem; align-items: baseline; font-size: .74rem; margin-bottom: .4rem; }
+  .cat { color: var(--accent); letter-spacing: .04em; }
+  .title { font-size: 1.02rem; line-height: 1.4; margin: 0; }
+  .desc {
+    font-size: .83rem; line-height: 1.7; margin: .45rem 0 0; color: var(--ink-mute);
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .lead .title { font-size: clamp(1.4rem, 2.6vw, 1.95rem); line-height: 1.28; }
+  .lead .desc { -webkit-line-clamp: 3; font-size: .98rem; }
+</style>

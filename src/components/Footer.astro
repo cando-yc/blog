@@ -1,0 +1,36 @@
+---
+import { SITE, NAV } from '../consts';
+const year = new Date().getFullYear();
+---
+<footer class="ft">
+  <div class="wrap ft-inner">
+    <div>
+      <p class="ft-brand">{SITE.name}<span class="muted"> · {SITE.nameEn}</span></p>
+      <p class="muted ft-mail">{SITE.email}</p>
+    </div>
+    <nav aria-label="頁尾導覽">
+      <ul>
+        {NAV.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+      </ul>
+    </nav>
+  </div>
+  <div class="wrap">
+    <p class="muted ft-copy">© {year} {SITE.name}（{SITE.nameEn}）</p>
+  </div>
+</footer>
+
+<style>
+  .ft { position: relative; margin-top: 5rem; padding: 3rem 0 2.5rem; }
+  /* 頂線對齊置中內容欄，不拉滿版 */
+  .ft::before {
+    content: '';
+    position: absolute; left: 50%; top: 0; transform: translateX(-50%);
+    width: min(var(--wrap), calc(100% - 2 * var(--step)));
+    border-top: 1px solid var(--line);
+  }
+  .ft-inner { display: flex; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
+  .ft-brand { font-family: var(--font-serif); font-size: 1.05rem; margin: 0; }
+  .ft-mail { margin: .3rem 0 0; font-size: .9rem; }
+  .ft nav ul { display: flex; gap: 1.2rem; list-style: none; margin: 0; padding: 0; font-size: .9rem; color: var(--ink-soft); }
+  .ft-copy { font-size: .8rem; margin: 2.5rem 0 0; }
+</style>

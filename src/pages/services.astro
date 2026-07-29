@@ -1,0 +1,53 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="服務" description="從全外包財務治理到顧問分析，依公司階段搭配。">
+  <section class="read services">
+    <header class="sh">
+      <p class="muted mono">服務</p>
+      <h1>依公司階段，搭配對的財務治理</h1>
+      <p class="muted lead">〔待補一句：我做的不是記帳，是讓你看得懂、決策得了的財務治理。〕</p>
+    </header>
+
+    <div class="tiers">
+      <div class="tier">
+        <h2>全外包財務治理</h2>
+        <p class="muted">〔待補〕我們是你的財務部：記帳、報表、月報、合規一手包，你只留判斷。</p>
+      </div>
+      <div class="tier">
+        <h2>顧問分析</h2>
+        <p class="muted">〔待補〕你有自己的帳，我做部門損益、現金、融資結構的分析與月會。</p>
+      </div>
+    </div>
+
+    <hr />
+
+    <div class="block">
+      <h2>收費怎麼算</h2>
+      <p class="muted">〔待補：透明定價 / 依實體數與服務深度，過濾不合適的詢問。〕</p>
+    </div>
+
+    <div class="block">
+      <h2>跟記帳士差在哪</h2>
+      <p class="muted">〔待補：記帳士做稅帳，我做管理帳與治理——這頁是轉換的關鍵，之後好好寫。〕</p>
+    </div>
+
+    <div class="cta-row">
+      <a href="/book" class="btn btn-accent">預約 30 分鐘初談</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .services { padding-top: 4rem; }
+  .sh h1 { font-size: clamp(1.8rem, 5vw, 2.8rem); margin: .5rem 0 .8rem; }
+  .lead { font-size: 1.05rem; }
+  .tiers { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 2.5rem 0; }
+  .tier { border: 1px solid var(--line); padding: 1.8rem; }
+  .tier h2 { font-size: 1.3rem; margin: 0 0 .8rem; }
+  .tier p { font-size: .95rem; margin: 0; }
+  .block { margin: 2rem 0; }
+  .block h2 { font-size: 1.3rem; }
+  .cta-row { margin: 3rem 0 0; }
+  @media (max-width: 640px) { .tiers { grid-template-columns: 1fr; } }
+</style>

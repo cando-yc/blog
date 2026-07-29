@@ -1,0 +1,61 @@
+---
+import Base from '../../layouts/Base.astro';
+import { CATEGORIES } from '../../consts';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('articles');
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const d = post.data.pubDate;
+const dateStr = `${d.getFullYear()}/${d.getMonth() + 1}/${d.getDate()}`;
+---
+<Base title={post.data.title} description={post.data.description}>
+  <article class="read">
+    <header class="post-head">
+      <div class="meta muted mono">
+        <time datetime={d.toISOString()}>{dateStr}</time>
+        <span class="cat">{CATEGORIES[post.data.category] ?? post.data.category}</span>
+      </div>
+      <h1>{post.data.title}</h1>
+    </header>
+    {post.data.image && (
+      <figure class="post-hero">
+        <img src={post.data.image} alt={post.data.title} loading="eager" />
+      </figure>
+    )}
+    <div class="prose">
+      <Content />
+    </div>
+    <footer class="post-foot">
+      <a href="/articles" class="cta-text">← 回文章列表</a>
+    </footer>
+  </article>
+</Base>
+
+<style>
+  .post-head { padding: 4rem 0 2rem; border-bottom: 1px solid var(--line); }
+  .meta { display: flex; gap: 1rem; font-size: .85rem; }
+  .cat { color: var(--accent); }
+  .post-head h1 { font-size: clamp(1.8rem, 5vw, 2.6rem); margin: 1rem 0 .8rem; line-height: 1.25; }
+  .byline { color: var(--ink-soft); margin: 0; font-size: .95rem; }
+  .post-hero { margin: 2rem 0 0; }
+  .post-hero img {
+    width: 100%; aspect-ratio: 16 / 9; object-fit: cover;
+    display: block; border: 1px solid var(--line);
+  }
+  .prose { padding: 2.5rem 0; }
+  .prose :global(h2) { font-size: 1.5rem; margin: 2.5rem 0 1rem; }
+  .prose :global(h3) { font-size: 1.25rem; margin: 2rem 0 .8rem; }
+  .prose :global(p) { margin: 0 0 1.4rem; }
+  .prose :global(img) { margin: 2rem 0; border: 1px solid var(--line); }
+  .prose :global(a) { color: var(--accent); border-bottom: 1px solid var(--accent); }
+  .prose :global(blockquote) { border-left: 2px solid var(--accent); margin: 1.5rem 0; padding: .2rem 0 .2rem 1.2rem; color: var(--ink-soft); }
+  .post-foot { border-top: 1px solid var(--line); padding: 2rem 0; }
+</style>

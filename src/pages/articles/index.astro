@@ -1,0 +1,43 @@
+---
+import Base from '../../layouts/Base.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import { CATEGORIES } from '../../consts';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('articles', ({ data }) => import.meta.env.PROD ? !data.draft : true))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+<Base title="文章" description="財務治理、AI 財會實戰與實戰案例。">
+  <section class="wrap head">
+    <h1>文章</h1>
+    <ul class="cats muted">
+      {Object.values(CATEGORIES).map((c) => <li>{c}</li>)}
+    </ul>
+  </section>
+
+  <section class="wrap">
+    {posts.length === 0 ? (
+      <p class="empty muted">內容整備中，第一批文章即將上線。</p>
+    ) : (
+      <div class="list">
+        {posts.map((p) => (
+          <ArticleCard
+            href={`/articles/${p.id}`}
+            title={p.data.title}
+            description={p.data.description}
+            pubDate={p.data.pubDate}
+            category={p.data.category}
+          />
+        ))}
+      </div>
+    )}
+  </section>
+</Base>
+
+<style>
+  .head { padding: 4rem 0 1.5rem; }
+  .head h1 { font-size: clamp(2rem, 5vw, 3rem); margin: 0 0 1rem; }
+  .cats { display: flex; gap: 1.2rem; flex-wrap: wrap; list-style: none; padding: 0; margin: 0; font-size: .9rem; }
+  .cats li:not(:last-child)::after { content: '·'; margin-left: 1.2rem; color: var(--line); }
+  .empty { padding: 4rem 0; text-align: center; }
+</style>

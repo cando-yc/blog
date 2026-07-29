@@ -1,0 +1,7 @@
+<svg viewBox="0 0 1200 900" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="抽象幾何色塊">
+  <rect width="1200" height="900" fill="#FFFFFF"/>
+  <rect x="230" y="270" width="320" height="320" fill="#12A594"/>
+  <circle cx="700" cy="420" r="180" fill="#F0B429" opacity="0.92"/>
+  <path d="M600 700 L880 700 L740 500 Z" fill="#E23B2E"/>
+  <rect x="905" y="255" width="38" height="38" fill="#1B1A17"/>
+</svg>

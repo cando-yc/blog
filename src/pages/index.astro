@@ -1,0 +1,98 @@
+---
+import Base from '../layouts/Base.astro';
+import GridCard from '../components/GridCard.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('articles', ({ data }) => import.meta.env.PROD ? !data.draft : true))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const recent = posts.slice(0, 5);
+const top = recent.slice(0, 2);
+const bottom = recent.slice(2);
+---
+<Base home={true}>
+  <section class="wrap articles">
+    <div class="sec-head">
+      <h2>近期文章</h2>
+      <a href="/articles" class="muted more">全部文章 →</a>
+    </div>
+
+    {recent.length === 0 ? (
+      <p class="empty muted">內容整備中，第一批文章即將上線。</p>
+    ) : (
+      <>
+        {top.length > 0 && (
+          <div class="grid grid-2">
+            {top.map((p) => (
+              <GridCard
+                href={`/articles/${p.id}`}
+                title={p.data.title}
+                description={p.data.description}
+                pubDate={p.data.pubDate}
+                category={p.data.category}
+                image={p.data.image}
+              />
+            ))}
+          </div>
+        )}
+        {bottom.length > 0 && (
+          <div class="grid grid-3">
+            {bottom.map((p) => (
+              <GridCard
+                href={`/articles/${p.id}`}
+                title={p.data.title}
+                description={p.data.description}
+                pubDate={p.data.pubDate}
+                category={p.data.category}
+                image={p.data.image}
+              />
+            ))}
+          </div>
+        )}
+      </>
+    )}
+  </section>
+
+  <section class="wrap pointers">
+    <a href="/about" class="pt">
+      <h3>關於</h3>
+      <p class="muted">美國會計師 × CFO 顧問 × AI 財務顧問。〔待補一句自我定位〕</p>
+      <span class="cta-text">認識我們 →</span>
+    </a>
+    <a href="/services" class="pt">
+      <h3>服務</h3>
+      <p class="muted">從全外包財務治理到顧問分析，依公司階段搭配。</p>
+      <span class="cta-text">看服務 →</span>
+    </a>
+  </section>
+</Base>
+
+<style>
+  .articles { margin-top: 3.5rem; }
+  .sec-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    border-bottom: 1px solid var(--ink); padding-bottom: .6rem;
+    margin-bottom: clamp(1.8rem, 3vw, 2.6rem);
+  }
+  .sec-head h2 { font-size: 1.1rem; margin: 0; letter-spacing: .04em; }
+  .more { font-size: .9rem; }
+
+  .grid { display: grid; gap: clamp(1.6rem, 3vw, 2.6rem); }
+  .grid-2 { grid-template-columns: repeat(2, 1fr); }
+  .grid-3 { grid-template-columns: repeat(3, 1fr); margin-top: clamp(2rem, 4vw, 3.4rem); }
+  .empty { padding: 3rem 0; text-align: center; }
+
+  .pointers { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 4.5rem; }
+  .pt { border: 1px solid var(--line); padding: 2rem; }
+  .pt:hover { border-color: var(--accent); }
+  .pt h3 { margin: 0 0 .6rem; font-size: 1.25rem; }
+  .pt p { font-size: .95rem; margin: 0 0 1rem; }
+
+  @media (max-width: 820px) {
+    .grid-3 { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 560px) {
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    .pointers { grid-template-columns: 1fr; }
+  }
+</style>

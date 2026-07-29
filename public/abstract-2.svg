@@ -1,0 +1,9 @@
+<svg viewBox="0 0 1200 900" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="抽象幾何色塊">
+  <rect width="1200" height="900" fill="#FFFFFF"/>
+  <rect x="250" y="520" width="140" height="230" fill="#12A594"/>
+  <rect x="440" y="420" width="140" height="330" fill="#F0B429"/>
+  <rect x="630" y="300" width="140" height="450" fill="#E23B2E"/>
+  <rect x="820" y="180" width="140" height="570" fill="#1B1A17"/>
+  <circle cx="890" cy="180" r="34" fill="#F0B429"/>
+  <rect x="180" y="752" width="840" height="8" fill="#1B1A17"/>
+</svg>

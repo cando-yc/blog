@@ -1,0 +1,30 @@
+---
+import { CATEGORIES } from '../consts';
+interface Props {
+  href: string;
+  title: string;
+  description?: string;
+  pubDate: Date;
+  category: string;
+}
+const { href, title, description, pubDate, category } = Astro.props;
+const d = pubDate;
+const dateStr = `${d.getFullYear()}/${d.getMonth() + 1}/${d.getDate()}`;
+---
+<a href={href} class="card">
+  <div class="meta">
+    <time class="mono muted" datetime={d.toISOString()}>{dateStr}</time>
+    <span class="cat">{CATEGORIES[category] ?? category}</span>
+  </div>
+  <h3 class="title">{title}</h3>
+  {description && <p class="desc muted">{description}</p>}
+</a>
+
+<style>
+  .card { display: block; padding: 1.6rem 0; border-top: 1px solid var(--line); }
+  .card:hover .title { color: var(--accent); }
+  .meta { display: flex; gap: 1rem; align-items: baseline; font-size: .82rem; margin-bottom: .5rem; }
+  .cat { color: var(--accent); letter-spacing: .04em; }
+  .title { font-size: 1.35rem; margin: 0; }
+  .desc { font-size: .95rem; margin: .5rem 0 0; }
+</style>
