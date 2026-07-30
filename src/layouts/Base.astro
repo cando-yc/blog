@@ -37,6 +37,14 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500&family=Noto+Serif+TC:wght@500;600&display=swap"
       rel="stylesheet"
     />
+
+    {SITE.cfBeaconToken && (
+      <script
+        defer
+        src="https://static.cloudflareinsights.com/beacon.min.js"
+        data-cf-beacon={`{"token": "${SITE.cfBeaconToken}"}`}
+      ></script>
+    )}
   </head>
   <body>
     {home ? (

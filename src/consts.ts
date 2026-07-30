@@ -14,6 +14,8 @@ export const SITE = {
   email: 'contact@ycfinance.tw',
   // Cando 個人 FB
   fb: 'https://www.facebook.com/cando.cfo/',
+  // Cloudflare Web Analytics beacon token（後台 Web Analytics → 加站點 blog.ycfinance.tw 取得，填了才載入）
+  cfBeaconToken: '0d4b745d674d494d8380f8230cfd6330',
 };
 
 // 導覽（首頁不放大肖像；人在作者頁）
