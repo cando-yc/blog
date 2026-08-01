@@ -9,7 +9,7 @@ const posts = (await getCollection('articles', ({ data }) => import.meta.env.PRO
 ---
 <Base title="文章" description="財務治理、AI 財會實戰與實戰案例。">
   <section class="wrap head">
-    <h1>文章</h1>
+    <h1>文章<span class="count mono">{posts.length}</span></h1>
     <ul class="cats muted">
       {Object.values(CATEGORIES).map((c) => <li>{c}</li>)}
     </ul>
@@ -37,6 +37,7 @@ const posts = (await getCollection('articles', ({ data }) => import.meta.env.PRO
 <style>
   .head { padding: 4rem 0 1.5rem; }
   .head h1 { font-size: clamp(2rem, 5vw, 3rem); margin: 0 0 1rem; }
+  .head h1 .count { font-size: .9rem; color: var(--accent); margin-left: .6rem; vertical-align: super; }
   .cats { display: flex; gap: 1.2rem; flex-wrap: wrap; list-style: none; padding: 0; margin: 0; font-size: .9rem; }
   .cats li:not(:last-child)::after { content: '·'; margin-left: 1.2rem; color: var(--line); }
   .empty { padding: 4rem 0; text-align: center; }
