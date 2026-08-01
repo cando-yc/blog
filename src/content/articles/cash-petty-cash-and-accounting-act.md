@@ -4,7 +4,7 @@ description: 記帳最讓人頭痛的一關就是現金，因為它是唯一不�
 pubDate: 2026-08-01
 category: B
 image: /cash-petty-cash-and-accounting-act.webp
-draft: true
+draft: false
 ---
 
 記帳這件事，不論是個人還是公司，最讓人傷腦筋的一關就是現金。
