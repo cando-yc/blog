@@ -11,7 +11,7 @@ interface Props {
   home?: boolean;
 }
 const { title, description, home = false } = Astro.props;
-const fullTitle = title ? `${title}｜${SITE.name}` : `${SITE.name}｜${SITE.positioning}`;
+const fullTitle = title ? `${title}｜${SITE.name}` : `${SITE.name}｜${SITE.titleTagline}`;
 const desc = description ?? SITE.tagline;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 ---
