@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import { CATEGORIES } from '../../consts';
 import { getCollection, render } from 'astro:content';
+import AuthorCard from '../../components/AuthorCard.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('articles', ({ data }) => import.meta.env.PROD ? !data.draft : true);
@@ -15,6 +16,17 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 const d = post.data.pubDate;
 const dateStr = `${d.getFullYear()}/${d.getMonth() + 1}/${d.getDate()}`;
+
+const all = (await getCollection('articles', ({ data }) => import.meta.env.PROD ? !data.draft : true))
+  .sort((a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf());
+const idx = all.findIndex((p) => p.id === post.id);
+const prev = idx > 0 ? all[idx - 1] : null;
+const next = idx < all.length - 1 ? all[idx + 1] : null;
+const others = all.filter((p) => p.id !== post.id).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const related = [
+  ...others.filter((p) => p.data.category === post.data.category),
+  ...others.filter((p) => p.data.category !== post.data.category),
+].slice(0, 3);
 ---
 <Base title={post.data.title} description={post.data.description}>
   <article class="read">
@@ -34,7 +46,42 @@ const dateStr = `${d.getFullYear()}/${d.getMonth() + 1}/${d.getDate()}`;
       <Content />
     </div>
     <footer class="post-foot">
-      <a href="/articles" class="cta-text">← 回文章列表</a>
+      {(prev || next) && (
+        <nav class="pn">
+          {prev ? (
+            <a class="pn-item" href={`/articles/${prev.id}`}>
+              <span class="pn-lbl muted">‹ 上一篇</span>
+              <span class="pn-t">{prev.data.title}</span>
+            </a>
+          ) : <span class="pn-item" />}
+          {next ? (
+            <a class="pn-item pn-r" href={`/articles/${next.id}`}>
+              <span class="pn-lbl muted">下一篇 ›</span>
+              <span class="pn-t">{next.data.title}</span>
+            </a>
+          ) : <span class="pn-item" />}
+        </nav>
+      )}
+
+      <AuthorCard />
+
+      {related.length > 0 && (
+        <section class="related">
+          <h2>延伸閱讀</h2>
+          <ul>
+            {related.map((p) => (
+              <li>
+                <a href={`/articles/${p.id}`}>
+                  <span class="rel-cat mono muted">{CATEGORIES[p.data.category] ?? p.data.category}</span>
+                  <span class="rel-t">{p.data.title}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      <a href="/articles" class="cta-text back">← 回文章列表</a>
     </footer>
   </article>
 </Base>
@@ -57,5 +104,24 @@ const dateStr = `${d.getFullYear()}/${d.getMonth() + 1}/${d.getDate()}`;
   .prose :global(img) { margin: 2rem 0; border: 1px solid var(--line); }
   .prose :global(a) { color: var(--accent); border-bottom: 1px solid var(--accent); }
   .prose :global(blockquote) { border-left: 2px solid var(--accent); margin: 1.5rem 0; padding: .2rem 0 .2rem 1.2rem; color: var(--ink-soft); }
-  .post-foot { border-top: 1px solid var(--line); padding: 2rem 0; }
+  .post-foot { border-top: 1px solid var(--line); padding: 2.5rem 0 0; }
+  .pn { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1rem, 4vw, 3rem); margin-bottom: 2.8rem; }
+  .pn-item { display: flex; flex-direction: column; gap: .35rem; }
+  .pn-r { text-align: right; }
+  .pn-lbl { font-size: .8rem; }
+  .pn-t { font-size: .98rem; line-height: 1.4; }
+  a.pn-item:hover .pn-t { color: var(--accent); }
+  .related { margin: 2.8rem 0; }
+  .related h2 { font-size: 1rem; letter-spacing: .04em; margin: 0 0 .8rem; padding-bottom: .5rem; border-bottom: 1px solid var(--ink); }
+  .related ul { list-style: none; padding: 0; margin: 0; }
+  .related li a { display: flex; gap: .9rem; align-items: baseline; padding: .85rem 0; border-top: 1px solid var(--line); }
+  .related li:first-child a { border-top: none; }
+  .related .rel-cat { font-size: .78rem; color: var(--accent); flex-shrink: 0; }
+  .related .rel-t { font-size: 1rem; }
+  .related li a:hover .rel-t { color: var(--accent); }
+  .back { display: inline-block; margin-top: 1.5rem; }
+  @media (max-width: 520px) {
+    .pn { grid-template-columns: 1fr; }
+    .pn-r { text-align: left; }
+  }
 </style>

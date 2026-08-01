@@ -21,9 +21,7 @@ export const SITE = {
 // 導覽（首頁不放大肖像；人在作者頁）
 export const NAV = [
   { label: '文章', href: '/articles' },
-  { label: '關於', href: '/about' },
   { label: '服務', href: '/services' },
-  { label: '預約', href: '/book' },
 ];
 
 // 三欄目（對應規劃 §二）

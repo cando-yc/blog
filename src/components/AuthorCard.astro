@@ -1,0 +1,27 @@
+---
+import { SITE } from '../consts';
+---
+<aside class="author-card">
+  <img class="avatar" src="/cando-portrait.webp" alt={SITE.author} width="88" height="88" loading="lazy" />
+  <div class="ac-body">
+    <p class="ac-name">{SITE.authorEn}<span class="ac-sub"> · {SITE.name} · AICPA</span></p>
+    <p class="ac-bio">近 20 年財務、會計與稅務實戰經驗，橫跨外商、中小企業到新創，經手過各種規模的財務治理。我創辦奕成財創，是想在合法合規的前提下，探索財務創新與技術應用的可能，打造對企業更友善的財務環境，協助企業做出更好的決策、提升營運績效，與企業共同成長。</p>
+  </div>
+</aside>
+
+<style>
+  .author-card {
+    display: flex; gap: 1.2rem; align-items: flex-start;
+    border: 1px solid var(--line); padding: clamp(1.4rem, 3vw, 2rem);
+  }
+  .avatar {
+    width: 88px; height: 88px; flex-shrink: 0;
+    object-fit: cover; border-radius: 50%; border: 1px solid var(--line);
+  }
+  .ac-name { font-family: var(--font-serif); font-size: 1.15rem; font-weight: 500; margin: 0 0 .5rem; }
+  .ac-sub { color: var(--ink-mute); font-weight: 400; font-size: .95rem; }
+  .ac-bio { font-size: .92rem; line-height: 1.85; color: var(--ink-soft); margin: 0; }
+  @media (max-width: 520px) {
+    .author-card { flex-direction: column; gap: .9rem; }
+  }
+</style>
