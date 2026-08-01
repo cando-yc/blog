@@ -13,7 +13,7 @@ export const SITE = {
   bookingUrl: '#',
   email: 'contact@ycfinance.tw',
   // Cando 個人 FB
-  fb: 'https://www.facebook.com/cando.cfo/',
+  fb: 'https://www.facebook.com/yichengfinance',
   // Cloudflare Web Analytics beacon token（後台 Web Analytics → 加站點 blog.ycfinance.tw 取得，填了才載入）
   cfBeaconToken: '0d4b745d674d494d8380f8230cfd6330',
 };
