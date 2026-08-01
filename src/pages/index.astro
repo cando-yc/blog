@@ -15,7 +15,7 @@ const bottom = recent.slice(2);
   <section class="wrap articles">
     <div class="sec-head">
       <h2>近期文章</h2>
-      <a href="/articles" class="muted more">全部文章 →</a>
+      <a href="/articles" class="muted more">全部文章<span class="count mono">{posts.length}</span> →</a>
     </div>
 
     {recent.length === 0 ? (
@@ -68,6 +68,7 @@ const bottom = recent.slice(2);
   }
   .sec-head h2 { font-size: 1.1rem; margin: 0; letter-spacing: .04em; }
   .more { font-size: .9rem; }
+  .more .count { color: var(--accent); margin: 0 .1rem 0 .4rem; }
 
   .grid { display: grid; gap: clamp(1.6rem, 3vw, 2.6rem); }
   .grid-2 { grid-template-columns: repeat(2, 1fr); }
