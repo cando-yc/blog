@@ -27,6 +27,7 @@ const posts = (await getCollection('articles', ({ data }) => import.meta.env.PRO
             description={p.data.description}
             pubDate={p.data.pubDate}
             category={p.data.category}
+            image={p.data.image}
           />
         ))}
       </div>
