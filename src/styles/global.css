@@ -15,7 +15,7 @@
   --font-sans:  "Noto Sans TC", -apple-system, "PingFang TC", "Microsoft JhengHei", sans-serif;
 
   --wrap:   1000px;   /* 寬區（首頁）— 中間收 */
-  --read:   720px;    /* 閱讀寬（文章） */
+  --read:   860px;    /* 閱讀寬（文章） */
   --step:   clamp(2rem, 6vw, 4.5rem);   /* 左右固定白邊，不貼齊視窗 */
 }
 
