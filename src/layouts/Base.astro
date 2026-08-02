@@ -8,12 +8,15 @@ import { SITE } from '../consts';
 interface Props {
   title?: string;
   description?: string;
+  image?: string;
   home?: boolean;
 }
-const { title, description, home = false } = Astro.props;
+const { title, description, image, home = false } = Astro.props;
 const fullTitle = title ? `${title}｜${SITE.name}` : `${SITE.name}｜${SITE.titleTagline}`;
 const desc = description ?? SITE.tagline;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
+// OG 圖需要絕對網址；有帶 image 才輸出（沒有就不放，分享時退成純標題卡）
+const ogImage = image ? new URL(image, Astro.site).href : undefined;
 ---
 <!doctype html>
 <html lang="zh-Hant">
@@ -29,7 +32,9 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={desc} />
     <meta property="og:url" content={canonical} />
+    {ogImage && <meta property="og:image" content={ogImage} />}
     <meta name="twitter:card" content="summary_large_image" />
+    {ogImage && <meta name="twitter:image" content={ogImage} />}
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

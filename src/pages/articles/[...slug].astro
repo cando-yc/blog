@@ -28,7 +28,7 @@ const related = [
   ...others.filter((p) => p.data.category !== post.data.category),
 ].slice(0, 3);
 ---
-<Base title={post.data.title} description={post.data.description}>
+<Base title={post.data.title} description={post.data.description} image={post.data.image}>
   <article class="read">
     <header class="post-head">
       <div class="meta muted mono">
