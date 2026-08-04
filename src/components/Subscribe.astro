@@ -1,0 +1,74 @@
+---
+// 電子報訂閱（Buttondown 公開內嵌端點；不需金鑰）
+const ACTION = 'https://buttondown.com/api/emails/embed-subscribe/cando.yeh';
+---
+<section class="subscribe">
+  <p class="sub-kicker mono muted">電子報</p>
+  <h2>把財務講人話，寄到你信箱</h2>
+  <p class="sub-dek muted">新文章上線，再加上一些沒寫進文章的財務觀察。雙重確認、隨時退訂，不寄垃圾。</p>
+  <form class="sub-form" action={ACTION} method="post" target="_blank">
+    <input type="email" name="email" required placeholder="你的 Email" autocomplete="email" aria-label="你的 Email" />
+    <input type="hidden" name="embed" value="1" />
+    <button type="submit">訂閱</button>
+  </form>
+  <p class="sub-msg" role="status" aria-live="polite"></p>
+</section>
+
+<style>
+  .subscribe { border: 1px solid var(--line); padding: clamp(1.6rem, 4vw, 2.4rem); }
+  .sub-kicker { font-size: .8rem; letter-spacing: .06em; margin: 0 0 .5rem; }
+  .subscribe h2 { font-family: var(--font-serif); font-size: clamp(1.2rem, 3vw, 1.5rem); font-weight: 500; margin: 0 0 .5rem; }
+  .sub-dek { font-size: .92rem; line-height: 1.7; margin: 0 0 1.2rem; }
+  .sub-form { display: flex; gap: .6rem; flex-wrap: wrap; }
+  .sub-form input[type="email"] {
+    flex: 1; min-width: 0; padding: .7rem .9rem;
+    border: 1px solid var(--line); background: var(--paper); color: var(--ink);
+    font: inherit; font-size: .95rem;
+  }
+  .sub-form input[type="email"]:focus { outline: none; border-color: var(--accent); }
+  .sub-form button {
+    padding: .7rem 1.5rem; border: 1px solid var(--accent);
+    background: var(--accent); color: #fff; font: inherit; font-size: .95rem;
+    cursor: pointer; white-space: nowrap; transition: opacity .15s;
+  }
+  .sub-form button:hover { opacity: .88; }
+  .sub-form button:disabled { opacity: .5; cursor: default; }
+  .sub-msg { font-size: .9rem; line-height: 1.6; margin: .9rem 0 0; color: var(--accent); }
+  .sub-msg:empty { display: none; }
+  .sub-done .sub-form { display: none; }
+  @media (max-width: 480px) {
+    .sub-form button { width: 100%; }
+  }
+</style>
+
+<script>
+  document.querySelectorAll('.subscribe').forEach((section) => {
+    const form = section.querySelector('.sub-form') as HTMLFormElement | null;
+    const msg = section.querySelector('.sub-msg') as HTMLElement | null;
+    if (!form || !msg) return;
+    const btn = form.querySelector('button') as HTMLButtonElement;
+    const input = form.querySelector('input[type="email"]') as HTMLInputElement;
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!input.reportValidity()) return;
+      btn.disabled = true;
+      const prev = btn.textContent;
+      btn.textContent = '送出中…';
+      try {
+        await fetch(form.action, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams({ email: input.value.trim(), embed: '1' }),
+        });
+        section.classList.add('sub-done');
+        msg.textContent = '收到了，請到信箱點一下確認信，就完成訂閱。';
+        form.reset();
+      } catch (err) {
+        btn.disabled = false;
+        btn.textContent = prev;
+        msg.textContent = '送出失敗，請稍後再試。';
+      }
+    });
+  });
+</script>

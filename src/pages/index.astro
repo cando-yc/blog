@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import GridCard from '../components/GridCard.astro';
 import AuthorCard from '../components/AuthorCard.astro';
+import Subscribe from '../components/Subscribe.astro';
 import { getCollection } from 'astro:content';
 
 const posts = (await getCollection('articles', ({ data }) => import.meta.env.PROD ? !data.draft : true))
@@ -57,6 +58,10 @@ const bottom = recent.slice(2);
   <section class="wrap author-wrap">
     <AuthorCard />
   </section>
+
+  <section class="wrap sub-wrap">
+    <Subscribe />
+  </section>
 </Base>
 
 <style>
@@ -76,6 +81,7 @@ const bottom = recent.slice(2);
   .empty { padding: 3rem 0; text-align: center; }
 
   .author-wrap { margin-top: 4.5rem; }
+  .sub-wrap { margin-top: 2rem; margin-bottom: 1rem; }
   .pt { border: 1px solid var(--line); padding: 2rem; }
   .pt:hover { border-color: var(--accent); }
   .pt h3 { margin: 0 0 .6rem; font-size: 1.25rem; }
