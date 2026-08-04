@@ -55,12 +55,12 @@ const bottom = recent.slice(2);
     )}
   </section>
 
-  <section class="wrap author-wrap">
-    <AuthorCard />
-  </section>
-
   <section class="wrap sub-wrap">
     <Subscribe />
+  </section>
+
+  <section class="wrap author-wrap">
+    <AuthorCard />
   </section>
 </Base>
 
@@ -80,8 +80,8 @@ const bottom = recent.slice(2);
   .grid-3 { grid-template-columns: repeat(3, 1fr); margin-top: clamp(2rem, 4vw, 3.4rem); }
   .empty { padding: 3rem 0; text-align: center; }
 
-  .author-wrap { margin-top: 4.5rem; }
-  .sub-wrap { margin-top: 2rem; margin-bottom: 1rem; }
+  .sub-wrap { margin-top: 4.5rem; }
+  .author-wrap { margin-top: 2.5rem; margin-bottom: 1rem; }
   .pt { border: 1px solid var(--line); padding: 2rem; }
   .pt:hover { border-color: var(--accent); }
   .pt h3 { margin: 0 0 .6rem; font-size: 1.25rem; }
