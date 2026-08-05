@@ -16,9 +16,10 @@ import { SITE, NAV } from '../consts';
       </a>
     </div>
   </div>
-  <a href="/" class="mh-brand" aria-label={SITE.name}>
-    <img src="/yclogo.svg" alt={SITE.name} class="mh-logo" width="128" height="110" />
-    <span class="mh-word">{SITE.abbr}</span>
+  <a href="/" class="mh-brand" aria-label={SITE.blogName}>
+    <img src="/yclogo.svg" alt={SITE.blogName} class="mh-logo" width="128" height="110" />
+    <span class="mh-word">{SITE.blogName}</span>
+    <span class="mh-sub">{SITE.titleTagline}</span>
   </a>
   <nav class="mh-nav" aria-label="主導覽">
     <ul>
@@ -66,8 +67,12 @@ import { SITE, NAV } from '../consts';
   }
   .mh-word {
     display: block; font-family: var(--font-serif);
-    font-size: clamp(1.4rem, 3.4vw, 2rem); font-weight: 500;
-    letter-spacing: .32em; margin: .05rem 0 0; padding-left: .32em;
+    font-size: clamp(1.5rem, 3.6vw, 2.1rem); font-weight: 500;
+    letter-spacing: .18em; margin: .35rem 0 0; padding-left: .18em;
+  }
+  .mh-sub {
+    display: block; color: var(--ink-mute);
+    font-size: .82rem; letter-spacing: .14em; margin-top: .4rem;
   }
   .mh-nav ul {
     display: flex; justify-content: center; flex-wrap: wrap;

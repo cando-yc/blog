@@ -4,19 +4,25 @@ import Nav from '../components/Nav.astro';
 import Masthead from '../components/Masthead.astro';
 import Footer from '../components/Footer.astro';
 import { SITE } from '../consts';
+import { organization, website } from '../lib/schema';
 
 interface Props {
   title?: string;
   description?: string;
   image?: string;
   home?: boolean;
+  ogType?: string;
+  publishedTime?: string;
+  jsonLd?: object[];
 }
-const { title, description, image, home = false } = Astro.props;
-const fullTitle = title ? `${title}｜${SITE.name}` : `${SITE.name}｜${SITE.titleTagline}`;
-const desc = description ?? SITE.tagline;
+const { title, description, image, home = false, ogType = 'website', publishedTime, jsonLd = [] } = Astro.props;
+const fullTitle = title ? `${title}｜${SITE.blogName}` : `${SITE.blogName}｜${SITE.titleTagline}`;
+const desc = description ?? SITE.description;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 // OG 圖需要絕對網址；有帶 image 才輸出（沒有就不放，分享時退成純標題卡）
 const ogImage = image ? new URL(image, Astro.site).href : undefined;
+// JSON-LD：全站 Organization + WebSite，再併入各頁自帶的 schema，用 @graph 串成一張
+const graph = { '@context': 'https://schema.org', '@graph': [organization, website, ...jsonLd] };
 ---
 <!doctype html>
 <html lang="zh-Hant">
@@ -28,13 +34,20 @@ const ogImage = image ? new URL(image, Astro.site).href : undefined;
     <meta name="description" content={desc} />
     <link rel="canonical" href={canonical} />
 
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={desc} />
     <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content={SITE.blogName} />
+    <meta property="og:locale" content="zh_TW" />
     {ogImage && <meta property="og:image" content={ogImage} />}
+    {ogType === 'article' && publishedTime && <meta property="article:published_time" content={publishedTime} />}
+    {ogType === 'article' && <meta property="article:author" content={SITE.author} />}
     <meta name="twitter:card" content="summary_large_image" />
     {ogImage && <meta name="twitter:image" content={ogImage} />}
+
+    <link rel="alternate" type="application/rss+xml" title={`${SITE.blogName}｜文章`} href="/rss.xml" />
+    <script type="application/ld+json" set:html={JSON.stringify(graph)} />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

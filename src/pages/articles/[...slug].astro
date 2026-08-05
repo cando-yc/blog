@@ -4,6 +4,7 @@ import { CATEGORIES } from '../../consts';
 import { getCollection, render } from 'astro:content';
 import AuthorCard from '../../components/AuthorCard.astro';
 import Subscribe from '../../components/Subscribe.astro';
+import { articleSchema, person, breadcrumb, BASE } from '../../lib/schema';
 
 export async function getStaticPaths() {
   const posts = await getCollection('articles', ({ data }) => import.meta.env.PROD ? !data.draft : true);
@@ -28,8 +29,20 @@ const related = [
   ...others.filter((p) => p.data.category === post.data.category),
   ...others.filter((p) => p.data.category !== post.data.category),
 ].slice(0, 3);
+
+const artUrl = new URL(`/articles/${post.id}`, Astro.site).href;
+const artImg = post.data.image ? new URL(post.data.image, Astro.site).href : undefined;
+const artJsonLd = [
+  articleSchema({ url: artUrl, title: post.data.title, description: post.data.description, image: artImg, datePublished: d.toISOString() }),
+  person,
+  breadcrumb([
+    { name: '首頁', url: `${BASE}/` },
+    { name: '文章', url: `${BASE}/articles` },
+    { name: post.data.title, url: artUrl },
+  ]),
+];
 ---
-<Base title={post.data.title} description={post.data.description} image={post.data.image}>
+<Base title={post.data.title} description={post.data.description} image={post.data.image} ogType="article" publishedTime={d.toISOString()} jsonLd={artJsonLd}>
   <article class="read">
     <header class="post-head">
       <div class="meta muted mono">
