@@ -13,10 +13,6 @@ const top = recent.slice(0, 2);
 const bottom = recent.slice(2);
 ---
 <Base home={true}>
-  <section class="wrap intro">
-    <p class="intro-line">企業主的外部財務長。把記帳、報表、稅務、募資這些事，講成你聽得懂、用得上的話。</p>
-  </section>
-
   <section class="wrap articles">
     <div class="sec-head">
       <h2>近期文章</h2>
@@ -69,12 +65,7 @@ const bottom = recent.slice(2);
 </Base>
 
 <style>
-  .intro { margin-top: 2.8rem; }
-  .intro-line {
-    font-family: var(--font-serif); font-size: clamp(1.05rem, 2.4vw, 1.35rem);
-    line-height: 1.7; color: var(--ink-soft); max-width: 34em; margin: 0;
-  }
-  .articles { margin-top: 2.8rem; }
+  .articles { margin-top: 3.5rem; }
   .sec-head {
     display: flex; align-items: baseline; justify-content: space-between;
     border-bottom: 1px solid var(--ink); padding-bottom: .6rem;
