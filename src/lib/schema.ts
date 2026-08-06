@@ -27,8 +27,7 @@ export const website = {
 export const person = {
   '@type': 'Person',
   '@id': `${BASE}/#cando`,
-  name: SITE.author,
-  alternateName: SITE.authorEn,
+  name: SITE.authorEn,
   jobTitle: SITE.positioning,
   description: '美國執業會計師（AICPA），近 20 年財務、會計與稅務實戰經驗，橫跨外商、中小企業到新創。',
   url: `${BASE}/about`,

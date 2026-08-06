@@ -42,7 +42,7 @@ const graph = { '@context': 'https://schema.org', '@graph': [organization, websi
     <meta property="og:locale" content="zh_TW" />
     {ogImage && <meta property="og:image" content={ogImage} />}
     {ogType === 'article' && publishedTime && <meta property="article:published_time" content={publishedTime} />}
-    {ogType === 'article' && <meta property="article:author" content={SITE.author} />}
+    {ogType === 'article' && <meta property="article:author" content={SITE.authorEn} />}
     <meta name="twitter:card" content="summary_large_image" />
     {ogImage && <meta name="twitter:image" content={ogImage} />}
 

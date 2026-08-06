@@ -32,7 +32,7 @@ src/
     index.astro          首頁
     articles/index.astro  文章庫
     articles/[...slug].astro  單篇文章模板
-    about.astro          關於葉可為（＝作者頁，含奕成一段）
+    about.astro          關於作者（＝作者頁，含奕成一段）
     services.astro       服務
     book.astro           預約（Cal.com 待接）
   content/articles/      文章 .md（目前空）
