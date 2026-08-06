@@ -1,7 +1,7 @@
 ---
 title: 文件整理術，奠定財務自動化的基礎
 description: 想做財務自動化的老闆，多半先想到自動記帳、自動報表。但這些都不是地基。地基是最沒人想碰的文件整理——這塊沒弄乾淨，後面的 AI 分析多半是幻覺。
-pubDate: 2026-07-24
+pubDate: 2026-06-09
 category: B
 image: /finance-dept-01-document-system.webp
 draft: false

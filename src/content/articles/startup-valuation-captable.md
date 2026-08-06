@@ -1,7 +1,7 @@
 ---
 title: 估值 5000 萬，是 pre 還是 post？差一個字就是好幾趴股權
 description: 第一次募資的創辦人最吃虧的，不是估值談太低，是聽不懂投資人在算什麼。這篇把 pre-money、post-money、股價、創投怎麼算持股、cap table 講清楚，讓你跟投資人用同一種語言談判。
-pubDate: 2026-07-30
+pubDate: 2026-07-14
 category: A
 image: /startup-valuation-captable.webp
 draft: false

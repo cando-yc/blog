@@ -1,7 +1,7 @@
 ---
 title: 現金為什麼最難記？現金付款還有可能違法？
 description: 記帳最讓人頭痛的一關就是現金，因為它是唯一不會自己留下紀錄的付款方式。個人可以用偷吃步反推，但公司不行。零用金制度怎麼管小錢，商業會計法又怎麼直接擋掉大額付現。
-pubDate: 2026-08-01
+pubDate: 2026-07-21
 category: B
 image: /cash-petty-cash-and-accounting-act.webp
 draft: false

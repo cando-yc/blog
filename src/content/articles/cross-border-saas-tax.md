@@ -1,7 +1,7 @@
 ---
 title: 什麼？公司訂閱Claude Code，除了付訂閱費竟然還要繳稅？
 description: 台灣公司向沒有台灣代理人的境外業者訂 SaaS，多數人以為就是付個訂閱費。其實你背了兩筆稅的義務：營業稅和扣繳所得稅，而且責任在你，不在那家外國公司。
-pubDate: 2026-07-30
+pubDate: 2026-06-30
 category: C
 image: /cross-border-saas-tax.webp
 draft: false

@@ -1,7 +1,7 @@
 ---
 title: 每月一封封寄發票太煩，群發網頁幫你解決
 description: 月初發發票給客戶，內容大同小異，卻得一封封改名、改稱謂、換附件地寄。現成方案不是太重就是太受限，我乾脆自己架了一個免費的群發郵件網頁。
-pubDate: 2026-07-29
+pubDate: 2026-06-23
 category: B
 image: /mailmerge-tool.webp
 draft: false

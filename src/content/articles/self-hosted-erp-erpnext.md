@@ -1,7 +1,7 @@
 ---
 title: 把底層交給 ERPNext，我才看清 yc 真正的價值
 description: 我把記帳引擎交付成內部 MVP 後想通一件事：不用從零建 ERP，讓現成的開源 ERP 搭載它就好。我為什麼在 Odoo 和 ERPNext 之間選了 ERPNext？把底層交出去後，我又如何重新看待 yc 的核心價值。
-pubDate: 2026-07-27
+pubDate: 2026-06-16
 category: B
 image: /self-hosted-erp-erpnext.webp
 draft: false

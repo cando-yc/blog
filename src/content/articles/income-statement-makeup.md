@@ -1,7 +1,7 @@
 ---
 title: 別只看化妝過後的損益表，資產負債表是素顏，那現金流量表呢？
 description: 老闆看報表多半只看損益表有沒有賺，但公司會不會出事，藏在另外兩張表裡。用妝容和素顏的比喻，說清楚三張財務報表各自在講什麼、為什麼要一起看。
-pubDate: 2026-05-18
+pubDate: 2026-05-19
 category: A
 image: /income-statement-makeup.webp
 draft: false

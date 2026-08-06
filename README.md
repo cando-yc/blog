@@ -41,6 +41,8 @@ public/                  favicon、圖片、之後放儀表板截圖
 
 ## 內容怎麼發
 
+> 文章清單與待寫題庫 SSOT＝repo 根目錄 `文章總表.md`（發文節奏：每週二一篇）。
+
 在 `src/content/articles/` 新增文章（檔名見下方命名規則）：
 
 ```md

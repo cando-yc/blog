@@ -1,7 +1,7 @@
 ---
 title: 面對匯率的變動，我們的帳本要如何反映呢？
 description: 你的資產負債有外幣計價的，該重評價、該認未實現損益，都隨著會計準則（IFRS／US GAAP）走；但個人記帳卻自由得多。從跨國企業的四種匯率，到自己記帳的三派做法，你是屬於哪一派呢？
-pubDate: 2026-07-30
+pubDate: 2026-07-07
 category: B
 image: /foreign-currency-bookkeeping.webp
 draft: false

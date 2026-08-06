@@ -1,10 +1,10 @@
 ---
 title: 營業稅沒搞懂，專案利潤直接少30%
 description: 用成本加價報價的生意，若拿含稅成本去加價、又遇到開不出發票的支出，營業稅會默默吃掉近三成利潤。差別只在報價用含稅還是不含稅。
-pubDate: 2026-06-07
+pubDate: 2026-06-02
 category: C
 image: /case-vat-markup-pricing.webp
-draft: true
+draft: false
 ---
 
 花 100 塊成本，加價 20%，跟客戶收 120。你覺得這單穩穩賺兩成，天經地義。

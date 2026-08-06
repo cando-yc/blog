@@ -1,7 +1,7 @@
 ---
 title: 財務長看公司，其實跟中醫看病一樣
 description: 財務長看一家公司，比較像中醫看病：先保命（現金）、再看作息（每月經營）、最後把脈看體質（財務結構）。三層各看什麼，老闆又只要聽哪一句診斷，一次說清楚。
-pubDate: 2026-08-04
+pubDate: 2026-07-28
 category: A
 image: /cfo-daily-dashboard.webp
 draft: false

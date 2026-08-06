@@ -1,7 +1,7 @@
 ---
 title: 開一間公司要花多少錢？我自己從頭到尾跑了一次
 description: 從預查到銀行開戶全程自己跑一次，把每一步和每一筆花費都記下來。設立費只要 4,900，但真正會一直跑的是後面每個月的固定成本。
-pubDate: 2026-05-23
+pubDate: 2026-05-26
 category: A
 image: /company-setup-cost.webp
 draft: false

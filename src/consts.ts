@@ -11,7 +11,7 @@ export const SITE = {
   positioning: '企業主的外部財務長',
   tagline: '財務的事整包交給我，你把時間花在把生意做大。',
   // 品牌副標／首頁 <title> 用的一句（瀏覽器分頁／SEO／masthead 副標）
-  titleTagline: '企業財務的大小事',
+  titleTagline: '分享財會在企業內部的大小事',
   // 全站預設 meta 描述（分享預覽／SEO）——描述型、非推銷
   description: '生意由你顧，財會有可為',
   // 【待補】Cal.com 或預約表單連結
