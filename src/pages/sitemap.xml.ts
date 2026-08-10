@@ -5,14 +5,15 @@ export async function GET() {
   const posts = (await getCollection('articles', ({ data }) => (import.meta.env.PROD ? !data.draft : true)))
     .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
+  // loc 一律帶尾斜線，與站台 canonical 一致；少了斜線會被 307 轉址，GSC 會報「網頁會重新導向」
   const staticUrls = [
     { loc: `${BASE}/`, lastmod: undefined as string | undefined },
-    { loc: `${BASE}/articles`, lastmod: posts[0]?.data.pubDate.toISOString() },
-    { loc: `${BASE}/about`, lastmod: undefined },
-    { loc: `${BASE}/services`, lastmod: undefined },
+    { loc: `${BASE}/articles/`, lastmod: posts[0]?.data.pubDate.toISOString() },
+    { loc: `${BASE}/about/`, lastmod: undefined },
+    { loc: `${BASE}/services/`, lastmod: undefined },
   ];
   const postUrls = posts.map((p) => ({
-    loc: `${BASE}/articles/${p.id}`,
+    loc: `${BASE}/articles/${p.id}/`,
     lastmod: p.data.pubDate.toISOString(),
   }));
 

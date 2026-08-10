@@ -13,7 +13,8 @@ export async function GET() {
     .map(
       (p) => `    <item>
       <title>${esc(p.data.title)}</title>
-      <link>${BASE}/articles/${p.id}</link>
+      <link>${BASE}/articles/${p.id}/</link>
+      <!-- guid 是訂閱端的「看過沒」識別碼，一旦改動所有舊文會被當新文重推，故維持無尾斜線原樣 -->
       <guid>${BASE}/articles/${p.id}</guid>
       <pubDate>${p.data.pubDate.toUTCString()}</pubDate>
       ${p.data.description ? `<description>${esc(p.data.description)}</description>` : ''}
