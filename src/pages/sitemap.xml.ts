@@ -9,7 +9,6 @@ export async function GET() {
   const staticUrls = [
     { loc: `${BASE}/`, lastmod: undefined as string | undefined },
     { loc: `${BASE}/articles/`, lastmod: posts[0]?.data.pubDate.toISOString() },
-    { loc: `${BASE}/about/`, lastmod: undefined },
     { loc: `${BASE}/services/`, lastmod: undefined },
   ];
   const postUrls = posts.map((p) => ({
