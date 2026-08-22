@@ -4,6 +4,7 @@ import GridCard from '../components/GridCard.astro';
 import AuthorCard from '../components/AuthorCard.astro';
 import Subscribe from '../components/Subscribe.astro';
 import { getCollection } from 'astro:content';
+import { SITE } from '../consts';
 
 const posts = (await getCollection('articles', ({ data }) => import.meta.env.PROD ? !data.draft : true))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
@@ -13,6 +14,10 @@ const top = recent.slice(0, 2);
 const bottom = recent.slice(2);
 ---
 <Base home={true}>
+  <section class="wrap lede">
+    <p class="lede-text">{SITE.positioning}。{SITE.tagline}</p>
+  </section>
+
   <section class="wrap articles">
     <div class="sec-head">
       <h2>近期文章</h2>
@@ -65,7 +70,9 @@ const bottom = recent.slice(2);
 </Base>
 
 <style>
-  .articles { margin-top: 3.5rem; }
+  .lede { margin-top: 2.6rem; text-align: center; }
+  .lede-text { font-family: var(--font-serif); font-size: clamp(1.05rem, 2vw, 1.25rem); color: var(--ink-soft); margin: 0; letter-spacing: .02em; }
+  .articles { margin-top: 3rem; }
   .sec-head {
     display: flex; align-items: baseline; justify-content: space-between;
     border-bottom: 1px solid var(--ink); padding-bottom: .6rem;

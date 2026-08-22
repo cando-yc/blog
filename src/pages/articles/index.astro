@@ -6,33 +6,39 @@ import { getCollection } from 'astro:content';
 
 const posts = (await getCollection('articles', ({ data }) => import.meta.env.PROD ? !data.draft : true))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const groups = Object.entries(CATEGORIES)
+  .map(([k, name]) => ({ k, name, items: posts.filter((p) => p.data.category === k) }))
+  .filter((g) => g.items.length > 0);
 ---
 <Base title="文章" description="財務治理、AI 財會實戰與實戰案例。">
   <section class="wrap head">
     <h1>文章<span class="count mono">{posts.length}</span></h1>
     <ul class="cats muted">
-      {Object.values(CATEGORIES).map((c) => <li>{c}</li>)}
+      {groups.map((g) => <li><a href={`#cat-${g.k}`}>{g.name}<span class="n mono">{g.items.length}</span></a></li>)}
     </ul>
   </section>
 
-  <section class="wrap">
-    {posts.length === 0 ? (
-      <p class="empty muted">內容整備中，第一批文章即將上線。</p>
-    ) : (
-      <div class="list">
-        {posts.map((p) => (
-          <ArticleCard
-            href={`/articles/${p.id}`}
-            title={p.data.title}
-            description={p.data.description}
-            pubDate={p.data.pubDate}
-            category={p.data.category}
-            image={p.data.image}
-          />
-        ))}
-      </div>
-    )}
-  </section>
+  {posts.length === 0 ? (
+    <section class="wrap"><p class="empty muted">內容整備中，第一批文章即將上線。</p></section>
+  ) : (
+    groups.map((g) => (
+      <section class="wrap group" id={`cat-${g.k}`}>
+        <h2 class="g-head">{g.name}<span class="n mono muted">{g.items.length}</span></h2>
+        <div class="list">
+          {g.items.map((p) => (
+            <ArticleCard
+              href={`/articles/${p.id}`}
+              title={p.data.title}
+              description={p.data.description}
+              pubDate={p.data.pubDate}
+              category={p.data.category}
+              image={p.data.image}
+            />
+          ))}
+        </div>
+      </section>
+    ))
+  )}
 </Base>
 
 <style>
@@ -41,5 +47,10 @@ const posts = (await getCollection('articles', ({ data }) => import.meta.env.PRO
   .head h1 .count { font-size: .9rem; color: var(--accent); margin-left: .6rem; vertical-align: super; }
   .cats { display: flex; gap: 1.2rem; flex-wrap: wrap; list-style: none; padding: 0; margin: 0; font-size: .9rem; }
   .cats li:not(:last-child)::after { content: '·'; margin-left: 1.2rem; color: var(--line); }
+  .cats a:hover { color: var(--accent); }
+  .cats .n { font-size: .78rem; margin-left: .35rem; color: var(--ink-mute); }
+  .group { margin-top: 2.2rem; scroll-margin-top: 80px; }
+  .g-head { font-size: 1.1rem; letter-spacing: .04em; margin: 0 0 .2rem; padding-bottom: .6rem; border-bottom: 1px solid var(--ink); }
+  .g-head .n { font-size: .8rem; margin-left: .5rem; vertical-align: super; }
   .empty { padding: 4rem 0; text-align: center; }
 </style>
