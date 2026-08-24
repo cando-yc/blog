@@ -1,6 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { CATEGORIES } from '../../consts';
+import { CATEGORIES, SITE } from '../../consts';
 import { getCollection, render } from 'astro:content';
 import AuthorCard from '../../components/AuthorCard.astro';
 import Subscribe from '../../components/Subscribe.astro';
@@ -77,7 +77,7 @@ const artJsonLd = [
         </nav>
       )}
 
-      <p class="post-cta">你的公司也卡在這類問題？<a href="/book" class="cta-text">預約 30 分鐘初談 →</a></p>
+      <p class="post-cta">你的公司也卡在這類問題？<a href={SITE.bookingUrl} class="cta-text">預約 30 分鐘初談 →</a></p>
 
       <div class="sub-slot"><Subscribe /></div>
 

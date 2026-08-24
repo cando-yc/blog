@@ -14,8 +14,8 @@ export const SITE = {
   titleTagline: '分享財會在企業內部的大小事',
   // 全站預設 meta 描述（分享預覽／SEO）——描述型、非推銷
   description: '生意由你顧，財會有可為',
-  // 【待補】Cal.com 或預約表單連結
-  bookingUrl: '#',
+  // 預約＝官網首頁的聯絡表單（ycfinance.tw #contact），blog 不自養預約頁
+  bookingUrl: 'https://ycfinance.tw/#contact',
   email: 'contact@ycfinance.tw',
   // Cando 個人 FB
   fb: 'https://www.facebook.com/yichengfinance',
@@ -27,7 +27,7 @@ export const SITE = {
 export const NAV = [
   { label: '文章', href: '/articles' },
   { label: '服務', href: 'https://ycfinance.tw' },
-  { label: '預約', href: '/book' },
+  { label: '預約', href: 'https://ycfinance.tw/#contact' },
 ];
 
 // 三欄目（對應規劃 §二）
