@@ -14,10 +14,11 @@
   // 預覽網址（blog.<account>.workers.dev）：驗證用，網域切換後可關
   "workers_dev": true,
   // 舊主機名 301 開關：Pages 專案解綁 ycfinance.tw、本 worker 綁上之後改 "1"
-  "vars": { "LEGACY_REDIRECT": "0" },
+  "vars": { "LEGACY_REDIRECT": "1" },
   // 自訂網域：ycfinance.tw 是正式入口；www 與 blog 只為 301 保留（zone 在本帳號，會自動建 DNS + SSL）
-  // ⚠ ycfinance.tw / www 目前仍綁在 Pages 專案 ycfinance；在 dashboard 解綁後再把下面兩行加回來
   "routes": [
+    { "pattern": "ycfinance.tw", "custom_domain": true },
+    { "pattern": "www.ycfinance.tw", "custom_domain": true },
     { "pattern": "blog.ycfinance.tw", "custom_domain": true }
   ]
 }
