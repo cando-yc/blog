@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /api/
 
-Sitemap: https://blog.ycfinance.tw/sitemap.xml
+Sitemap: https://ycfinance.tw/sitemap.xml

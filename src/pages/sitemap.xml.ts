@@ -1,5 +1,6 @@
 import { getCollection } from 'astro:content';
 import { BASE } from '../lib/schema';
+import { caseStudies } from '../lib/cases';
 
 export async function GET() {
   const posts = (await getCollection('articles', ({ data }) => (import.meta.env.PROD ? !data.draft : true)))
@@ -9,6 +10,8 @@ export async function GET() {
   const staticUrls = [
     { loc: `${BASE}/`, lastmod: undefined as string | undefined },
     { loc: `${BASE}/articles/`, lastmod: posts[0]?.data.pubDate.toISOString() },
+    { loc: `${BASE}/about/`, lastmod: undefined },
+    ...caseStudies.map((c) => ({ loc: `${BASE}/cases/${c.slug}/`, lastmod: undefined as string | undefined })),
   ];
   const postUrls = posts.map((p) => ({
     loc: `${BASE}/articles/${p.id}/`,

@@ -1,7 +1,10 @@
 ---
+// 文章庫＝「財會有可為」內容品牌的入口（masthead＋依欄目分區＋訂閱＋作者卡）
 import Base from '../../layouts/Base.astro';
 import ArticleCard from '../../components/ArticleCard.astro';
-import { CATEGORIES } from '../../consts';
+import AuthorCard from '../../components/AuthorCard.astro';
+import Subscribe from '../../components/Subscribe.astro';
+import { CATEGORIES, SITE } from '../../consts';
 import { getCollection } from 'astro:content';
 
 const posts = (await getCollection('articles', ({ data }) => import.meta.env.PROD ? !data.draft : true))
@@ -10,7 +13,11 @@ const groups = Object.entries(CATEGORIES)
   .map(([k, name]) => ({ k, name, items: posts.filter((p) => p.data.category === k) }))
   .filter((g) => g.items.length > 0);
 ---
-<Base title="文章" description="財務治理、AI 財會實戰與實戰案例。">
+<Base home={true} title="文章" description="財務治理、AI 財會實戰與實戰案例。">
+  <section class="wrap lede">
+    <p class="lede-text">{SITE.positioning}。{SITE.tagline}</p>
+  </section>
+
   <section class="wrap head">
     <h1>文章<span class="count mono">{posts.length}</span></h1>
     <ul class="cats muted">
@@ -39,10 +46,20 @@ const groups = Object.entries(CATEGORIES)
       </section>
     ))
   )}
+
+  <section class="wrap sub-wrap">
+    <Subscribe />
+  </section>
+
+  <section class="wrap author-wrap">
+    <AuthorCard />
+  </section>
 </Base>
 
 <style>
-  .head { padding: 4rem 0 1.5rem; }
+  .lede { margin-top: 2.6rem; text-align: center; }
+  .lede-text { font-family: var(--font-serif); font-size: clamp(1.05rem, 2vw, 1.25rem); color: var(--ink-soft); margin: 0; letter-spacing: .02em; }
+  .head { padding: 2.6rem 0 1.5rem; }
   .head h1 { font-size: clamp(2rem, 5vw, 3rem); margin: 0 0 1rem; }
   .head h1 .count { font-size: .9rem; color: var(--accent); margin-left: .6rem; vertical-align: super; }
   .cats { display: flex; gap: 1.2rem; flex-wrap: wrap; list-style: none; padding: 0; margin: 0; font-size: .9rem; }
@@ -53,4 +70,6 @@ const groups = Object.entries(CATEGORIES)
   .g-head { font-size: 1.1rem; letter-spacing: .04em; margin: 0 0 .2rem; padding-bottom: .6rem; border-bottom: 1px solid var(--ink); }
   .g-head .n { font-size: .8rem; margin-left: .5rem; vertical-align: super; }
   .empty { padding: 4rem 0; text-align: center; }
+  .sub-wrap { margin-top: 4.5rem; }
+  .author-wrap { margin-top: 2.5rem; margin-bottom: 1rem; }
 </style>

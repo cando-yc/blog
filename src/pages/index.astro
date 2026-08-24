@@ -1,104 +1,33 @@
 ---
-import Base from '../layouts/Base.astro';
-import GridCard from '../components/GridCard.astro';
-import AuthorCard from '../components/AuthorCard.astro';
-import Subscribe from '../components/Subscribe.astro';
-import { getCollection } from 'astro:content';
-import { SITE } from '../consts';
+// 官網首頁（原 SvelteKit 一頁式，整個元件搬過來以 client:load 掛載，互動與動畫原樣保留）
+import SiteBase from '../layouts/SiteBase.astro';
+import HomePage from '../components/site/HomePage.svelte';
 
-const posts = (await getCollection('articles', ({ data }) => import.meta.env.PROD ? !data.draft : true))
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
-
-const recent = posts.slice(0, 5);
-const top = recent.slice(0, 2);
-const bottom = recent.slice(2);
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: '奕成財創',
+  url: 'https://ycfinance.tw',
+  email: 'contact@yicheng.finance',
+  founder: {
+    '@type': 'Person',
+    name: '葉可為 Cando Yeh',
+    jobTitle: '美國執業會計師（AICPA）',
+  },
+  description:
+    '協助中小企業與新創把財務方針寫下來、落進帳與流程，透過每月固定月報與月會的財務治理，讓數字開始改變決定。',
+  serviceType: '財務治理顧問',
+  areaServed: { '@type': 'Country', name: 'Taiwan' },
+  inLanguage: 'zh-Hant-TW',
+};
 ---
-<Base home={true}>
-  <section class="wrap lede">
-    <p class="lede-text">{SITE.positioning}。{SITE.tagline}</p>
-  </section>
-
-  <section class="wrap articles">
-    <div class="sec-head">
-      <h2>近期文章</h2>
-      <a href="/articles" class="muted more">全部文章<span class="count mono">{posts.length}</span> →</a>
-    </div>
-
-    {recent.length === 0 ? (
-      <p class="empty muted">內容整備中，第一批文章即將上線。</p>
-    ) : (
-      <>
-        {top.length > 0 && (
-          <div class="grid grid-2">
-            {top.map((p) => (
-              <GridCard
-                href={`/articles/${p.id}`}
-                title={p.data.title}
-                description={p.data.description}
-                pubDate={p.data.pubDate}
-                category={p.data.category}
-                image={p.data.image}
-              />
-            ))}
-          </div>
-        )}
-        {bottom.length > 0 && (
-          <div class="grid grid-3">
-            {bottom.map((p) => (
-              <GridCard
-                href={`/articles/${p.id}`}
-                title={p.data.title}
-                description={p.data.description}
-                pubDate={p.data.pubDate}
-                category={p.data.category}
-                image={p.data.image}
-              />
-            ))}
-          </div>
-        )}
-      </>
-    )}
-  </section>
-
-  <section class="wrap sub-wrap">
-    <Subscribe />
-  </section>
-
-  <section class="wrap author-wrap">
-    <AuthorCard />
-  </section>
-</Base>
-
-<style>
-  .lede { margin-top: 2.6rem; text-align: center; }
-  .lede-text { font-family: var(--font-serif); font-size: clamp(1.05rem, 2vw, 1.25rem); color: var(--ink-soft); margin: 0; letter-spacing: .02em; }
-  .articles { margin-top: 3rem; }
-  .sec-head {
-    display: flex; align-items: baseline; justify-content: space-between;
-    border-bottom: 1px solid var(--ink); padding-bottom: .6rem;
-    margin-bottom: clamp(1.8rem, 3vw, 2.6rem);
-  }
-  .sec-head h2 { font-size: 1.1rem; margin: 0; letter-spacing: .04em; }
-  .more { font-size: .9rem; }
-  .more .count { color: var(--accent); margin: 0 .1rem 0 .4rem; }
-
-  .grid { display: grid; gap: clamp(1.6rem, 3vw, 2.6rem); }
-  .grid-2 { grid-template-columns: repeat(2, 1fr); }
-  .grid-3 { grid-template-columns: repeat(3, 1fr); margin-top: clamp(2rem, 4vw, 3.4rem); }
-  .empty { padding: 3rem 0; text-align: center; }
-
-  .sub-wrap { margin-top: 4.5rem; }
-  .author-wrap { margin-top: 2.5rem; margin-bottom: 1rem; }
-  .pt { border: 1px solid var(--line); padding: 2rem; }
-  .pt:hover { border-color: var(--accent); }
-  .pt h3 { margin: 0 0 .6rem; font-size: 1.25rem; }
-  .pt p { font-size: .95rem; margin: 0 0 1rem; }
-
-  @media (max-width: 820px) {
-    .grid-3 { grid-template-columns: repeat(2, 1fr); }
-  }
-  @media (max-width: 560px) {
-    .grid-2, .grid-3 { grid-template-columns: 1fr; }
-    .pointers { grid-template-columns: 1fr; }
-  }
-</style>
+<SiteBase
+  title="奕成財創｜中小企業財務顧問・外部 CFO・每月財務治理"
+  description="奕成財創是中小企業與新創的外部 CFO／財務顧問：把財務方針寫下來、落進帳與流程，每月固定月報與月會，讓老闆看得懂自己的公司、做得了決定。先從一次免費初步評估開始。"
+  ogTitle="奕成財創｜把財務，變成你的槓桿"
+  ogDescription="Finance isn't overhead. It's leverage. 把財務方針寫下來、落進帳與流程，每月固定月報與月會，讓數字開始改變決定。"
+  ogImage="/og-image.jpg"
+  jsonLd={[jsonLd]}
+>
+  <HomePage client:load />
+</SiteBase>

@@ -1,7 +1,7 @@
 // JSON-LD 結構化資料（SEO / AEO）——用 @id 互相連結成一張 graph
 import { SITE } from '../consts';
 
-export const BASE = 'https://blog.ycfinance.tw';
+export const BASE = 'https://ycfinance.tw';
 
 export const organization = {
   '@type': 'Organization',
@@ -19,7 +19,7 @@ export const website = {
   '@id': `${BASE}/#site`,
   name: SITE.blogName,
   alternateName: SITE.titleTagline,
-  url: BASE,
+  url: `${BASE}/articles/`,
   inLanguage: 'zh-Hant',
   publisher: { '@id': `${BASE}/#org` },
 };
@@ -30,7 +30,7 @@ export const person = {
   name: SITE.authorEn,
   jobTitle: SITE.positioning,
   description: '美國執業會計師（AICPA），近 20 年財務、會計與稅務實戰經驗，橫跨外商、中小企業到新創。',
-  url: 'https://ycfinance.tw',
+  url: `${BASE}/about/`,
   image: `${BASE}/cando-portrait.webp`,
   worksFor: { '@id': `${BASE}/#org` },
   sameAs: [SITE.fb],

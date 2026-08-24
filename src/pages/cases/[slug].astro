@@ -1,0 +1,70 @@
+---
+// 案例頁（原 SvelteKit /cases/[slug]，改為 Astro 靜態頁；資料在 src/lib/cases.ts）
+import SiteBase from '../../layouts/SiteBase.astro';
+import { caseStudies } from '../../lib/cases';
+
+export function getStaticPaths() {
+  return caseStudies.map((c) => ({ params: { slug: c.slug }, props: { c } }));
+}
+const { c } = Astro.props;
+const title = `${c.ind}｜奕成財創案例`;
+const description = `${c.ind}案例：${c.title}`;
+---
+<SiteBase title={title} description={description} ogType="article" ogImage="/og-image.jpg">
+  <main class="min-h-screen bg-[var(--bg)]">
+    <header class="border-b border-[var(--line)] bg-white/95 backdrop-blur-sm">
+      <div class="max-w-[980px] mx-auto px-6 h-14 flex items-center justify-between">
+        <a href="/" class="inline-block shrink-0" aria-label="回首頁">
+          <img src="/yclogo.svg" alt="奕成財創 Logo" class="h-6 w-auto" />
+        </a>
+        <a
+          href="/#cases"
+          class="inline-flex items-center gap-2 text-[var(--ink)] hover:text-[var(--brand-primary)] transition-colors duration-200"
+          style="font-family: var(--font-serif); font-size: 14px; letter-spacing: 0.08em;"
+        >
+          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+          回案例列表
+        </a>
+      </div>
+    </header>
+
+    <section style="padding-top: clamp(52px,6vw,84px); padding-bottom: clamp(72px,8vw,120px);">
+      <div class="max-w-[860px] mx-auto px-6">
+        <p class="meta uppercase opacity-70 mb-4">{c.ind}</p>
+        <h1
+          class="font-[var(--font-serif)] text-[var(--ink)] mb-6"
+          style="font-size: clamp(30px,4vw,46px); line-height: 1.5; letter-spacing: 0.06em; font-weight: 500;"
+        >
+          {c.title}
+        </h1>
+
+        <div class="border-l-2 border-[var(--line-2)] pl-5 mb-12">
+          <p class="body-copy text-[var(--ink)]">老闆說：「{c.ownerQuote}」</p>
+        </div>
+
+        <div class="space-y-7">
+          {c.story.map((paragraph) => <p class="body-copy text-[var(--ink-2)]">{paragraph}</p>)}
+        </div>
+
+        <div class="mt-12 pt-8 border-t border-[var(--line)]">
+          <h2
+            class="font-[var(--font-serif)] text-[var(--ink)] mb-5"
+            style="font-size: 20px; letter-spacing: 0.08em; font-weight: 500;"
+          >
+            成果
+          </h2>
+          <ul class="space-y-3 pl-5 list-disc">
+            {c.outcomes.map((o) => <li class="body-copy text-[var(--ink-2)]">{o}</li>)}
+          </ul>
+        </div>
+
+        <div class="mt-14">
+          <a href="/#contact" class="btn-primary inline-flex items-center gap-2">
+            預約30分鐘訪談
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+</SiteBase>

@@ -1,0 +1,594 @@
+@import "tailwindcss";
+
+@theme inline {
+  --default-font-family: "Noto Sans TC", -apple-system, BlinkMacSystemFont, "Hiragino Sans", "PingFang TC", sans-serif;
+}
+
+:root {
+  --font-sans: "Noto Sans TC", -apple-system, BlinkMacSystemFont, "Hiragino Sans", "PingFang TC", sans-serif;
+  --font-serif: "Noto Serif TC", "Hiragino Mincho ProN", "Songti TC", serif;
+  --font-latin: "Cormorant Garamond", "EB Garamond", serif;
+  --bg: #FCFCFC;
+  --paper: #FAFAF8;
+  --bg-deep: #F2F2EF;
+  --ink: #1A1A1A;
+  --ink-2: #3D3D3D;
+  --muted: #8A8A85;
+  --line: #E5E3DD;
+  --line-2: #C8C5BD;
+  --rule: #1A1A1A;
+  --brand-primary: #164A73;
+  --brand-accent: #B8893A;
+  --sec: clamp(120px, 14vw, 220px);
+  --sec-top: clamp(110px, 12vw, 170px);
+
+  /*
+   * Typography scale — 日式編輯設計
+   * 精緻感 = 小字 + 大留白 + 高行高
+   * 對齊 intro-website 的原始設計
+   */
+
+  /* Body & UI text (×1.1) */
+  --text-xs: 12px;
+  /* uppercase tracking labels, badges, who */
+  --text-sm: 14px;
+  /* latin italic captions, meta, footnotes */
+  --text-nav: 15px;
+  /* nav links, footer links, buttons, text-link */
+  --text-body: 16.5px;
+  /* body copy — 明朝體 line-height 2.1~2.2 */
+  --text-base: 16.5px;
+  /* same as body — base size for the site */
+  --text-lg: 24px;
+  /* case result numbers, price emphasis */
+
+  /* Heading scale (×1.1) */
+  --text-h-card: clamp(18px, 1.65vw, 22px);
+  /* case titles, FAQ questions */
+  --text-h-sub: clamp(22px, 2.2vw, 29px);
+  /* sub-headings (principle h3, step titles) */
+  --text-h-quote: clamp(22px, 1.95vw, 29px);
+  /* quote grid text */
+  --text-h-pull: clamp(24px, 2.53vw, 30px);
+  /* pull quotes */
+  --text-h-section: clamp(26px, 3vw, 38px);
+  /* section headings */
+  --text-h-cta: clamp(26px, 3.1vw, 42px);
+  /* CTA headline */
+  --text-h-stat: clamp(44px, 5.06vw, 70px);
+  /* big stat numbers */
+  --text-h-roi: clamp(26px, 2.75vw, 40px);
+  /* ROI savings numbers */
+  --text-quote-mark: 79px;
+  /* decorative quotation mark */
+
+  /* Relative sizes (em-based, scales with parent) */
+  --text-en-label: 0.48em;
+  /* english label after section headings */
+  --text-stat-unit: 0.42em;
+  /* unit suffix on stat numbers */
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 56px;
+  /* 導覽列的高度 h-14 = 56px */
+}
+
+body {
+  font-family: var(--font-sans, "Noto Sans TC", sans-serif);
+  background: var(--bg);
+  color: var(--ink);
+  font-weight: 400;
+  line-height: 1.9;
+  font-size: var(--text-base);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "palt" 1, "kern" 1;
+}
+
+/* Global Noise Texture (Washi paper feel)
+   注意：不用 mix-blend-mode——全畫面混色層會讓行動裝置捲動明顯掉幀 */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+  opacity: 0.035;
+}
+
+::selection {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+/* ── Semantic text classes ── */
+
+/* Section heading: 明朝體, centered */
+.sec-title {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: var(--text-h-section);
+  letter-spacing: 0.24em;
+  color: var(--ink);
+  line-height: 1.6;
+  display: inline-block;
+}
+
+/* English label after section heading */
+.sec-en {
+  font-family: var(--font-latin);
+  font-style: italic;
+  font-size: var(--text-en-label);
+  letter-spacing: 0.18em;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-left: 14px;
+  vertical-align: 0.15em;
+}
+
+/* Section intro paragraph */
+.sec-intro {
+  font-family: var(--font-serif);
+  font-size: var(--text-body);
+  line-height: 2.2;
+  color: var(--ink-2);
+  max-width: 780px;
+  margin: 32px auto 0;
+  text-wrap: pretty;
+}
+
+/* Sub-heading with english small text */
+.sub-title {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: var(--text-h-sub);
+  line-height: 1.7;
+  letter-spacing: 0.08em;
+  margin-bottom: 20px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--line);
+}
+
+.sub-title small {
+  display: block;
+  font-family: var(--font-latin);
+  font-style: italic;
+  font-size: var(--text-sm);
+  color: var(--muted);
+  letter-spacing: 0.2em;
+  margin-top: 6px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+/* Body copy: 明朝體 */
+.body-copy {
+  font-family: var(--font-serif);
+  font-size: var(--text-body);
+  line-height: 2.1;
+  color: var(--ink-2);
+}
+
+/* Muted meta text (latin italic) */
+.meta {
+  font-family: var(--font-latin);
+  font-style: italic;
+  font-size: var(--text-sm);
+  color: var(--muted);
+  letter-spacing: 0.22em;
+}
+
+/* Muted label (sans, uppercase) */
+.label-muted {
+  font-size: var(--text-xs);
+  color: var(--muted);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+
+/* Stat number */
+.stat-num {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: var(--text-h-stat);
+  line-height: 1;
+  color: var(--ink);
+  letter-spacing: 0.01em;
+}
+
+.stat-num .unit {
+  font-weight: 400;
+  font-size: var(--text-stat-unit);
+  color: var(--muted);
+  margin-left: 4px;
+}
+
+/* Primary button */
+.btn-primary {
+  display: inline-flex;
+  gap: 14px;
+  align-items: center;
+  padding: 16px 30px;
+  background: var(--brand-primary);
+  color: var(--bg);
+  font-family: var(--font-serif);
+  font-size: var(--text-nav);
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-decoration: none;
+  border: 1px solid var(--brand-primary);
+  transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-primary:hover {
+  background: transparent;
+  color: var(--brand-primary);
+  transform: translateY(-2px);
+}
+
+.btn-primary svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* Footer meta text */
+.foot-meta {
+  font-family: var(--font-latin);
+  font-style: italic;
+  font-size: var(--text-sm);
+  letter-spacing: 0.14em;
+  color: var(--muted);
+}
+
+/* ── Layout ── */
+.wrap {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0 clamp(24px, 5vw, 80px);
+}
+
+/* ── Nav ── */
+.nav-link {
+  font-family: var(--font-serif);
+  font-size: var(--text-nav);
+  color: var(--ink);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.nav-link:hover {
+  color: var(--brand-primary);
+}
+
+.nav-cta {
+  font-family: var(--font-serif);
+  font-size: var(--text-nav);
+  color: #fff;
+  text-decoration: none;
+  background: var(--brand-primary);
+  border: 1px solid var(--brand-primary);
+  padding: 5px 16px;
+  transition: background 0.25s ease, border-color 0.25s ease;
+}
+
+.nav-cta:hover {
+  background: #0f3a5c;
+  border-color: #0f3a5c;
+}
+
+/* ── Quote grid ── */
+.quote-cell {
+  padding: clamp(24px, 2.5vw, 40px);
+  background: #ffffff;
+  border: 1px solid #d7d7d7;
+  border-radius: 4px;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8) inset, 0 2px 8px rgba(26, 26, 26, 0.03);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.quote-cell:hover {
+  border-color: #a8a49c;
+  box-shadow: 0 2px 16px rgba(26, 26, 26, 0.07);
+}
+
+.quote-num {
+  font-family: var(--font-latin);
+  font-style: italic;
+  font-size: var(--text-body);
+  color: var(--ink);
+  letter-spacing: 0.06em;
+  min-width: 28px;
+}
+
+.quote-who {
+  font-size: 13px;
+  color: var(--muted);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-top: auto;
+}
+
+.quote-text {
+  font-family: var(--font-serif);
+  font-size: var(--text-base);
+  line-height: 1.8;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  text-wrap: pretty;
+}
+
+.quote-mark {
+  border-bottom: 1.5px solid var(--brand-accent);
+  font-weight: 500;
+  padding-bottom: 1px;
+}
+
+/* ── Pull quote ── */
+.pull-quote-mark {
+  font-family: var(--font-latin);
+  font-size: var(--text-quote-mark);
+  color: var(--brand-accent);
+  line-height: 0.2;
+  display: block;
+  margin-bottom: 24px;
+}
+
+.pull-quote {
+  font-family: var(--font-serif);
+  font-size: var(--text-h-pull);
+  line-height: 1.85;
+  max-width: 860px;
+  margin: 0 auto;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+.pull-quote-em {
+  font-weight: 500;
+  border-bottom: 1.5px solid var(--brand-accent);
+  padding-bottom: 2px;
+}
+
+/* ── Case rows ── */
+.case-row {
+  display: grid;
+  grid-template-columns: 100px 1fr auto;
+  gap: clamp(24px, 3vw, 40px);
+  align-items: start;
+  padding: clamp(32px, 4vw, 48px) 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.case-title {
+  font-family: var(--font-serif);
+  font-size: var(--text-h-card);
+  font-weight: 500;
+  margin-bottom: 8px;
+  letter-spacing: 0.02em;
+}
+
+.case-result {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: var(--text-lg);
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+/* ── Stat cells ── */
+.stat-cell {
+  padding: clamp(36px, 4vw, 56px) 24px;
+  text-align: center;
+}
+
+/* ── Step cells ── */
+.step-cell {
+  padding: clamp(40px, 5vw, 64px);
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.step-num {
+  font-family: var(--font-latin);
+  font-style: normal;
+  font-size: clamp(52px, 6vw, 80px);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--brand-primary);
+  opacity: 0.22;
+  margin-bottom: 24px;
+}
+
+.step-cell .meta {
+  font-size: 16px;
+}
+
+.step-price {
+  font-family: var(--font-serif);
+  font-size: var(--text-base);
+  color: var(--ink);
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+
+.step-tag {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  color: var(--muted);
+  border: 1px solid var(--line-2);
+  padding: 4px 10px;
+  letter-spacing: 0.1em;
+}
+
+/* ── FAQ ── */
+.faq-q {
+  font-family: var(--font-serif);
+  font-size: var(--text-base);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+
+.faq-icon {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  margin-left: 24px;
+}
+
+.faq-icon-line-h, .faq-icon-line-v {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background-color: var(--ink);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease;
+  transform: translate(-50%, -50%);
+}
+
+.faq-icon-line-h {
+  width: 14px;
+  height: 1px;
+}
+
+.faq-icon-line-v {
+  width: 1px;
+  height: 14px;
+}
+
+.faq-icon.open .faq-icon-line-v {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.group:hover .faq-icon-line-h,
+.group:hover .faq-icon-line-v {
+  background-color: var(--brand-primary);
+}
+
+/* ── CTA ── */
+.cta-headline {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: var(--text-h-cta);
+  line-height: 1.55;
+  letter-spacing: 0.06em;
+  color: var(--ink);
+  margin-bottom: 40px;
+  text-wrap: balance;
+}
+
+/* ── Footer ── */
+.foot-heading {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: var(--text-nav);
+  letter-spacing: 0.24em;
+  color: var(--ink);
+  margin-bottom: 22px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line-2);
+}
+
+.foot-heading small {
+  display: block;
+  font-family: var(--font-latin);
+  font-style: italic;
+  font-size: var(--text-xs);
+  color: var(--muted);
+  letter-spacing: 0.2em;
+  margin-top: 4px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.foot-link {
+  font-family: var(--font-serif);
+  font-size: var(--text-body);
+  color: var(--ink-2);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.foot-link:hover {
+  color: var(--ink);
+}
+
+/* ── Scroll-reveal animations ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger delays for grouped items */
+.reveal-d1 { transition-delay: 0.08s; }
+.reveal-d2 { transition-delay: 0.16s; }
+.reveal-d3 { transition-delay: 0.24s; }
+.reveal-d4 { transition-delay: 0.32s; }
+.reveal-d5 { transition-delay: 0.40s; }
+
+/* Respect reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .sec-title {
+    letter-spacing: 0.14em;
+  }
+
+  .sec-en {
+    display: block;
+    margin-left: 0;
+    margin-top: 8px;
+  }
+
+  .case-row {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 34px 0;
+  }
+
+  .case-row .meta {
+    font-size: 13px;
+    line-height: 1.7;
+  }
+
+  .case-title {
+    font-size: 20px;
+    line-height: 1.65;
+  }
+
+  .case-result {
+    font-size: 22px;
+  }
+
+  .cta-headline {
+    font-size: clamp(24px, 6.2vw, 32px);
+    line-height: 1.6;
+  }
+
+  .btn-primary {
+    width: 100%;
+    justify-content: center;
+  }
+}
+

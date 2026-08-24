@@ -1,0 +1,58 @@
+---
+import SiteBase from '../layouts/SiteBase.astro';
+---
+<SiteBase title="隱私權政策｜奕成財創" description="奕成財創有限公司隱私權政策。" noindex={true}>
+  <div class="min-h-screen">
+    <nav class="fixed top-0 inset-x-0 z-50 bg-white/95 backdrop-blur-md border-b border-[var(--line)]">
+      <div class="max-w-[980px] mx-auto px-6 h-14 flex items-center justify-between">
+        <a href="/" aria-label="奕成財創" class="flex items-center">
+          <img src="/yclogo.svg" alt="奕成財創 Logo" class="h-5 w-auto" />
+        </a>
+        <a href="/" class="nav-link">回首頁</a>
+      </div>
+    </nav>
+
+    <main class="wrap" style="padding: 120px 0 100px;">
+      <div class="max-w-[720px] mx-auto">
+        <h1 class="sec-title" style="font-size: clamp(24px, 2.8vw, 34px); letter-spacing: 0.14em;">隱私權政策</h1>
+        <p class="meta mt-2">最後更新：2026/08/02</p>
+
+        <div class="body-copy mt-10 space-y-6">
+          <p>奕成財創有限公司（以下稱「本公司」）重視您的個人資料保護。您透過本網站表單或 LINE 官方帳號提供的資料，依本政策處理。</p>
+
+          <h2 class="privacy-h">一、蒐集之個人資料</h2>
+          <p>公司名稱、姓名、電話、Email、產業別、營收規模，以及您自願提供的財務現況自評結果。</p>
+
+          <h2 class="privacy-h">二、蒐集目的與利用方式</h2>
+          <p>僅用於：回覆您的預約與諮詢、安排初步評估與後續服務聯繫。本公司不會將您的資料出售、出租或提供予第三人作行銷使用。</p>
+
+          <h2 class="privacy-h">三、利用期間與地區</h2>
+          <p>自蒐集時起至蒐集目的消失為止，利用地區為台灣。若您未成為客戶，聯絡資料將於合理期間後刪除。</p>
+
+          <h2 class="privacy-h">四、您的權利</h2>
+          <p>
+            依個人資料保護法，您得請求查詢、閱覽、補充、更正、停止蒐集處理利用或刪除您的個人資料。行使方式：來信
+            <a href="mailto:contact@yicheng.finance" class="underline underline-offset-4 hover:text-[var(--brand-primary)]">contact@yicheng.finance</a>。
+          </p>
+
+          <h2 class="privacy-h">五、資料安全</h2>
+          <p>本公司對客戶與潛在客戶資料採取保密措施，僅授權人員於必要範圍內存取。</p>
+
+          <h2 class="privacy-h">六、政策修訂</h2>
+          <p>本政策如有修訂，將公布於本頁面。</p>
+        </div>
+      </div>
+    </main>
+  </div>
+</SiteBase>
+
+<style>
+  .privacy-h {
+    font-family: var(--font-serif);
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: var(--ink);
+    margin-top: 32px;
+  }
+</style>

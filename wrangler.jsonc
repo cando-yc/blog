@@ -1,15 +1,23 @@
 {
   "name": "blog",
   "compatibility_date": "2026-07-29",
-  // Astro 靜態輸出；純靜態資產、無 Worker 腳本
+  "compatibility_flags": ["nodejs_compat"],
+  // 入口是我們自己的包裝：先處理 blog.ycfinance.tw / www → ycfinance.tw 的 301，再交給 Astro 產生的 worker
+  "main": "./worker/entry.mjs",
   "assets": {
-    "directory": "./dist"
+    "directory": "./dist",
+    "binding": "ASSETS",
+    // 所有請求先進 worker（才攔得到舊主機名的轉址）；靜態頁由 Astro handler 透過 ASSETS 回傳
+    "run_worker_first": true
   },
-  // 自動綁自訂網域（ycfinance.tw 這個 zone 已在本帳號，會自動建 DNS + SSL）
+  "observability": { "enabled": true },
+  // 預覽網址（blog.<account>.workers.dev）：驗證用，網域切換後可關
+  "workers_dev": true,
+  // 舊主機名 301 開關：Pages 專案解綁 ycfinance.tw、本 worker 綁上之後改 "1"
+  "vars": { "LEGACY_REDIRECT": "0" },
+  // 自訂網域：ycfinance.tw 是正式入口；www 與 blog 只為 301 保留（zone 在本帳號，會自動建 DNS + SSL）
+  // ⚠ ycfinance.tw / www 目前仍綁在 Pages 專案 ycfinance；在 dashboard 解綁後再把下面兩行加回來
   "routes": [
-    {
-      "pattern": "blog.ycfinance.tw",
-      "custom_domain": true
-    }
+    { "pattern": "blog.ycfinance.tw", "custom_domain": true }
   ]
 }
