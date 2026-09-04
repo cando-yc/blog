@@ -8,7 +8,7 @@
     "build": "astro build && printf '_worker.js\\n_routes.json\\n' > dist/.assetsignore",
     "preview": "astro preview",
     "astro": "astro",
-    "deploy": "astro build && wrangler deploy"
+    "deploy": "npm run build && wrangler deploy"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^12.6.13",
